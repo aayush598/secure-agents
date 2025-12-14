@@ -31,13 +31,10 @@ async function getOrCreateUser(clerkUser: any) {
 
 export async function GET() {
   try {
-    const user =
-  (await currentUser()) ?? {
-    id: 'test-user-123',
-    emailAddresses: [{ emailAddress: 'test@example.com' }],
-    firstName: 'Test',
-    lastName: 'User',
-  };
+    const user = await currentUser();
+    if (!user) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
 
 
     const dbUser = await getOrCreateUser(user);

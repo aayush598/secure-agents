@@ -6,7 +6,7 @@ import { Shield, Key, FileCode, BarChart3, Plus, Copy, Check, Trash2, AlertCircl
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger, DialogClose } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Badge } from '@/components/ui/badge';
@@ -103,6 +103,7 @@ export default function DashboardPage() {
   };
 
   const createApiKey = async () => {
+    console.log('createApiKey')
     if (!newKeyName.trim()) {
       toast.error('Please enter a name for the API key');
       return;
@@ -201,6 +202,44 @@ export default function DashboardPage() {
   return (
     <div className="min-h-screen bg-slate-50">
       <Toaster />
+
+      <Dialog>
+  <DialogContent>
+    <DialogHeader>
+      <DialogTitle>Create New API Key</DialogTitle>
+      <DialogDescription>
+        Give your API key a memorable name
+      </DialogDescription>
+    </DialogHeader>
+
+    <div className="space-y-4 py-4">
+      <div className="space-y-2">
+        <Label htmlFor="api-key-name">Key Name</Label>
+        <Input
+          id="api-key-name"
+          name="api-key-name"
+          autoComplete="off"
+          placeholder="Production Key"
+          value={newKeyName}
+          onChange={(e) => setNewKeyName(e.target.value)}
+        />
+      </div>
+    </div>
+
+    <DialogFooter>
+      <DialogClose asChild>
+        <Button variant="outline">Cancel</Button>
+      </DialogClose>
+      <Button
+        onClick={createApiKey}
+        className="bg-indigo-600 text-white hover:bg-indigo-700"
+      >
+        Create Key
+      </Button>
+    </DialogFooter>
+  </DialogContent>
+</Dialog>
+
       
       {/* Header */}
       <div className="bg-white border-b border-slate-200">
