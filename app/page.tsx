@@ -49,7 +49,7 @@ export default function LandingPage() {
                 <div className="absolute inset-0 bg-indigo-400 blur-lg opacity-30"></div>
               </div>
               <span className="text-2xl font-bold bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">
-                GuardRails AI
+                Secure Agents
               </span>
             </div>
 
@@ -586,7 +586,7 @@ export default function LandingPage() {
             <div>
               <div className="flex items-center space-x-2 mb-4">
                 <Shield className="h-6 w-6 text-indigo-400" />
-                <span className="text-lg font-bold text-white">GuardRails AI</span>
+                <span className="text-lg font-bold text-white">Secure Agents</span>
               </div>
               <p className="text-sm text-slate-400">
                 Enterprise-grade security for your LLM applications
@@ -635,7 +635,7 @@ export default function LandingPage() {
 
           <div className="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center">
             <p className="text-sm text-slate-400 mb-4 md:mb-0">
-              &copy; 2025 GuardRails AI. All rights reserved.
+              &copy; 2025 Secure Agents. All rights reserved.
             </p>
             <div className="flex space-x-6">
               {[
