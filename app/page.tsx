@@ -311,7 +311,7 @@ export default function LandingPage() {
       <section id="features" className="relative py-20 bg-gradient-to-b from-white to-blue-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <div className="inline-flex items-center space-x-2 bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-semibold mb-6">
+            <div className="inline-flex items-center space-x-2 bg-blue-100 text-gray-700 px-4 py-2 rounded-full text-sm font-semibold mb-6">
               <Sparkles className="h-4 w-4" />
               <span>Powerful Features</span>
             </div>
@@ -329,21 +329,21 @@ export default function LandingPage() {
                 icon: Shield,
                 title: 'Input Validation',
                 desc: 'Detect secrets, PII, PHI, and malicious patterns before they reach your LLM with real-time scanning and configurable sensitivity.',
-                gradient: 'from-blue-500 to-blue-600',
+                gradient: 'from-gray-500 to-gray-600',
                 features: ['PII Detection', 'Secret Scanning', 'Prompt Injection Defense'],
               },
               {
                 icon: Lock,
                 title: 'Output Sanitization',
                 desc: 'Automatically redact sensitive information from LLM responses to prevent data leaks and maintain confidentiality at scale.',
-                gradient: 'from-purple-500 to-purple-600',
+                gradient: 'from-gray-500 to-gray-600',
                 features: ['PII Redaction', 'Leak Prevention', 'Schema Validation'],
               },
               {
                 icon: Zap,
                 title: 'Parallel Processing',
                 desc: 'Execute multiple guardrails simultaneously with sub-100ms latency, built for production workloads and high throughput.',
-                gradient: 'from-pink-500 to-pink-600',
+                gradient: 'from-gray-500 to-gray-600',
                 features: ['Concurrent Execution', 'Load Balancing', 'Auto-scaling'],
               },
             ].map((feature) => (
