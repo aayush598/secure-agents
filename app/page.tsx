@@ -3,6 +3,14 @@
 import { useUser } from '@clerk/nextjs';
 import { useRouter } from 'next/navigation';
 import { Shield, Lock, Zap, CheckCircle, ArrowRight, Code, Key, BarChart3, Menu, X, Github, Twitter, Linkedin, Sparkles, Globe, Users, TrendingUp, Star, ChevronRight } from 'lucide-react';
+import {
+  ShieldCheck,
+  Building2,
+  Baby,
+  HeartPulse,
+  Landmark,
+  Wrench
+} from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { useState, useEffect } from 'react';
@@ -198,7 +206,7 @@ export default function LandingPage() {
               <Button
                 size="lg"
                 onClick={() => router.push('/sign-up')}
-                className="bg-gradient-to-r from-gray-600 to-gray-600 hover:from-gray-700 hover:to-gray-700 text-white text-lg px-8 py-6 shadow-xl shadow-blue-500/30 hover:shadow-2xl hover:shadow-blue-500/40 transition-all duration-300 group"
+                className="bg-gradient-to-r from-gray-600 to-gray-600 hover:from-gray-700 hover:to-gray-700 text-white text-lg px-8 py-6 shadow-xl shadow-gray-500/30 hover:shadow-2xl hover:shadow-gray-500/40 transition-all duration-300 group"
               >
                 Start Free Trial
                 <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
@@ -207,7 +215,7 @@ export default function LandingPage() {
                 size="lg"
                 variant="outline"
                 onClick={() => scrollToSection('#how-it-works')}
-                className="text-lg px-8 py-6 border-2 border-gray-300 hover:border-gray-600 hover:bg-blue-50 text-gray-700 hover:text-gray-600 transition-all duration-300"
+                className="text-lg px-8 py-6 border-2 border-gray-300 hover:border-gray-600 hover:bg-gray-50 text-gray-700 hover:text-gray-600 transition-all duration-300"
               >
                 View Documentation
               </Button>
@@ -349,7 +357,7 @@ export default function LandingPage() {
             ].map((feature) => (
               <Card
                 key={feature.title}
-                className="bg-white border-gray-200 hover:border-blue-300 hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-300 group"
+                className="bg-white border-gray-200 hover:border-gray-300 hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-300 group"
               >
                 <CardContent className="pt-8 pb-6">
                   <div className={`bg-gradient-to-br ${feature.gradient} w-16 h-16 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-lg`}>
@@ -376,7 +384,7 @@ export default function LandingPage() {
       <section id="profiles" className="relative py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <div className="inline-flex items-center space-x-2 bg-purple-100 text-purple-700 px-4 py-2 rounded-full text-sm font-semibold mb-6">
+            <div className="inline-flex items-center space-x-2 bg-purple-100 text-gray-700 px-4 py-2 rounded-full text-sm font-semibold mb-6">
               <Globe className="h-4 w-4" />
               <span>Industry Solutions</span>
             </div>
@@ -390,21 +398,24 @@ export default function LandingPage() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
             {[
-              { name: 'Default', desc: 'Balanced security and performance for general-purpose applications', icon: '🛡️', guardrails: 7, color: 'blue' },
-              { name: 'Enterprise Security', desc: 'Maximum protection with strict controls for business-critical systems', icon: '🏢', guardrails: 15, color: 'purple' },
-              { name: 'Child Safety', desc: 'Content filtering and safety measures for educational platforms', icon: '👶', guardrails: 10, color: 'pink' },
-              { name: 'Healthcare', desc: 'HIPAA-compliant guardrails for protected health information', icon: '🏥', guardrails: 8, color: 'green' },
-              { name: 'Financial', desc: 'Regulatory compliance for banking and financial services', icon: '💰', guardrails: 9, color: 'yellow' },
-              { name: 'Minimal', desc: 'Lightweight validation for development and testing environments', icon: '🔧', guardrails: 1, color: 'gray' },
+              { name: 'Default', desc: 'Balanced security and performance for general-purpose applications', icon: ShieldCheck, guardrails: 7, color: 'blue' },
+              { name: 'Enterprise Security', desc: 'Maximum protection with strict controls for business-critical systems', icon: Building2, guardrails: 15, color: 'purple' },
+              { name: 'Child Safety', desc: 'Content filtering and safety measures for educational platforms', icon: Baby, guardrails: 10, color: 'pink' },
+              { name: 'Healthcare', desc: 'HIPAA-compliant guardrails for protected health information', icon: HeartPulse, guardrails: 8, color: 'green' },
+              { name: 'Financial', desc: 'Regulatory compliance for banking and financial services', icon: Landmark, guardrails: 9, color: 'yellow' },
+              { name: 'Minimal', desc: 'Lightweight validation for development and testing environments', icon: Wrench, guardrails: 1, color: 'gray' },
             ].map((profile) => (
               <Card
                 key={profile.name}
-                className="bg-gradient-to-br from-white to-gray-50 border-gray-200 hover:border-blue-300 hover:shadow-xl transition-all duration-300 group cursor-pointer"
+                className="bg-gradient-to-br from-white to-gray-50 border-gray-200 hover:border-gray-300 hover:shadow-xl transition-all duration-300 group cursor-pointer"
               >
                 <CardContent className="pt-8">
                   <div className="flex items-start justify-between mb-4">
-                    <span className="text-5xl group-hover:scale-110 transition-transform">{profile.icon}</span>
-                    <div className="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-xs font-bold">
+                    <div className="bg-gradient-to-br from-gray-100 to-white border border-gray-200 w-14 h-14 rounded-xl flex items-center justify-center group-hover:scale-105 transition-transform">
+                      <profile.icon className="h-7 w-7 text-gray-700" />
+                    </div>
+
+                    <div className="bg-blue-100 text-gray-700 px-3 py-1 rounded-full text-xs font-bold">
                       {profile.guardrails} guardrails
                     </div>
                   </div>
@@ -419,7 +430,7 @@ export default function LandingPage() {
             <Button
               onClick={() => router.push('/sign-up')}
               variant="outline"
-              className="border-2 border-blue-600 hover:bg-blue-600 hover:text-white text-blue-600 px-8 py-3 font-semibold transition-all duration-300"
+              className="border-2 border-gray-600 hover:bg-gray-600 hover:text-white text-gray-600 px-8 py-3 font-semibold transition-all duration-300"
             >
               Create Custom Profile
               <ChevronRight className="ml-2 h-4 w-4" />
@@ -432,7 +443,7 @@ export default function LandingPage() {
       <section id="how-it-works" className="relative py-20 bg-gradient-to-b from-blue-50 to-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <div className="inline-flex items-center space-x-2 bg-green-100 text-green-700 px-4 py-2 rounded-full text-sm font-semibold mb-6">
+            <div className="inline-flex items-center space-x-2 bg-green-100 text-gray-700 px-4 py-2 rounded-full text-sm font-semibold mb-6">
               <Code className="h-4 w-4" />
               <span>Simple Integration</span>
             </div>
@@ -452,16 +463,16 @@ export default function LandingPage() {
             ].map((item, idx) => (
               <div key={item.step} className="text-center relative">
                 {idx < 2 && (
-                  <div className="hidden md:block absolute top-10 left-full w-full h-0.5 bg-gradient-to-r from-blue-300 to-purple-300 -translate-x-1/2"></div>
+                  <div className="hidden md:block absolute top-10 left-full w-full h-0.5 bg-gradient-to-r from-gray-400 to-gray-300 -translate-x-1/2"></div>
                 )}
                 <div className="relative mb-6 inline-block">
-                  <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-400 blur-2xl opacity-30"></div>
-                  <div className="relative bg-gradient-to-br from-blue-600 to-purple-600 text-white w-20 h-20 rounded-2xl flex items-center justify-center text-3xl font-bold shadow-xl">
+                  <div className="absolute inset-0 bg-gradient-to-r from-gray-800 to-gray-600 blur-2xl opacity-30"></div>
+                  <div className="relative bg-gradient-to-br from-gray-800 to-gray-600 text-white w-20 h-20 rounded-2xl flex items-center justify-center text-3xl font-bold shadow-xl">
                     {item.step}
                   </div>
                 </div>
                 <div className="bg-white rounded-2xl p-4 inline-block mb-4 shadow-lg border border-gray-200">
-                  <item.icon className="h-10 w-10 text-blue-600" />
+                  <item.icon className="h-10 w-10 text-gray-600" />
                 </div>
                 <h3 className="text-xl font-bold mb-3 text-gray-900">{item.title}</h3>
                 <p className="text-gray-600 leading-relaxed">{item.desc}</p>
@@ -475,7 +486,7 @@ export default function LandingPage() {
       <section id="pricing" className="relative py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <div className="inline-flex items-center space-x-2 bg-yellow-100 text-yellow-700 px-4 py-2 rounded-full text-sm font-semibold mb-6">
+            <div className="inline-flex items-center space-x-2 bg-yellow-100 text-gray-700 px-4 py-2 rounded-full text-sm font-semibold mb-6">
               <TrendingUp className="h-4 w-4" />
               <span>Transparent Pricing</span>
             </div>
@@ -489,7 +500,7 @@ export default function LandingPage() {
 
           <div className="max-w-5xl mx-auto grid md:grid-cols-3 gap-8">
             {/* Free Tier */}
-            <Card className="bg-white border-2 border-gray-200 hover:border-blue-300 hover:shadow-xl transition-all duration-300">
+            <Card className="bg-white border-2 border-gray-200 hover:border-gray-300 hover:shadow-xl transition-all duration-300">
               <CardContent className="pt-8">
                 <h3 className="text-2xl font-bold mb-2 text-gray-900">Free</h3>
                 <div className="mb-6">
@@ -512,13 +523,13 @@ export default function LandingPage() {
 
             {/* Pro Tier */}
             <Card className="bg-gradient-to-br from-blue-50 to-purple-50 border-2 border-blue-300 hover:border-blue-400 hover:shadow-2xl transition-all duration-300 relative overflow-hidden scale-105">
-              <div className="absolute top-0 right-0 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 text-sm font-bold rounded-bl-2xl shadow-lg">
+              <div className="absolute top-0 right-0 bg-gradient-to-r from-gray-800 to-gray-600 text-white px-6 py-2 text-sm font-bold rounded-bl-2xl shadow-lg">
                 Coming Soon
               </div>
               <CardContent className="pt-8">
                 <h3 className="text-2xl font-bold mb-2 text-gray-900">Pro</h3>
                 <div className="mb-6">
-                  <span className="text-5xl font-extrabold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">₹999</span>
+                  <span className="text-5xl font-extrabold bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent">₹999</span>
                   <span className="text-gray-700 ml-2">/ month</span>
                 </div>
                 <ul className="space-y-4 mb-8">
@@ -529,7 +540,7 @@ export default function LandingPage() {
                     </li>
                   ))}
                 </ul>
-                <Button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white opacity-60 cursor-not-allowed">
+                <Button className="w-full bg-gradient-to-r from-gray-800 to-gray-600 text-white opacity-60 cursor-not-allowed">
                   Coming Soon
                 </Button>
               </CardContent>
@@ -564,7 +575,7 @@ export default function LandingPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="relative py-24 bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600">
+      <section className="relative py-24 bg-gradient-to-br from-gray-800 via-slate-600 to-gray-600">
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmZmZmYiIGZpbGwtb3BhY2l0eT0iMC4xIj48cGF0aCBkPSJNMzYgMzRjMC0yLjIxLTEuNzktNC00LTRzLTQgMS43OS00IDQgMS43OSA0IDQgNCA0LTEuNzkgNC00em0wLTEwYzAtMi4yMS0xLjc5LTQtNC00cy00IDEuNzktNCA0IDEuNzkgNCA0IDQgNC0xLjc5IDQtNHptMC0xMGMwLTIuMjEtMS43OS00LTQtNHMtNCAxLjc5LTQgNCAxLjc5IDQgNCA0IDQtMS43OSA0LTR6TTEyIDM0YzAtMi4yMS0xLjc5LTQtNC00cy00IDEuNzktNCA0IDEuNzkgNCA0IDQgNC0xLjc5IDQtNHptMC0xMGMwLTIuMjEtMS43OS00LTQtNHMtNCAxLjc5LTQgNCAxLjc5IDQgNCA0IDQtMS43OSA0LTR6bTAtMTBjMC0yLjIxLTEuNzktNC00LTRzLTQgMS43OS00IDQgMS43OSA0IDQgNCA0LTEuNzkgNC00ek0yNCAzNGMwLTIuMjEtMS43OS00LTQtNHMtNCAxLjc5LTQgNCAxLjc5IDQgNCA0IDQtMS43OSA0LTR6bTAtMTBjMC0yLjItMS43OS00LTQtNHMtNCAxLjc5LTQgNCAxLjc5IDQgNCA0IDQtMS43OSA0LTR6bTAtMTBjMC0yLjIxLTEuNzktNC00LTRzLTQgMS43OS00IDQgMS43OSA0IDQgNCA0LTEuNzkgNC00eiIvPjwvZz48L2c+PC9zdmc+')] opacity-10"></div>
         
         <div className="container mx-auto px-4 relative">
@@ -586,7 +597,7 @@ export default function LandingPage() {
               <Button
                 size="lg"
                 onClick={() => router.push('/sign-up')}
-                className="bg-white text-blue-600 hover:bg-gray-100 text-lg px-12 py-6 shadow-2xl hover:shadow-3xl transition-all duration-300 group font-bold"
+                className="bg-white text-gray-600 hover:text-gray-900 hover:bg-gray-100 text-lg px-12 py-6 shadow-2xl hover:shadow-3xl transition-all duration-300 group font-bold"
               >
                 Start Building Now
                 <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
@@ -595,7 +606,7 @@ export default function LandingPage() {
                 size="lg"
                 variant="outline"
                 onClick={() => scrollToSection('#pricing')}
-                className="text-lg px-12 py-6 border-2 border-white text-white hover:bg-white hover:text-blue-600 transition-all duration-300 font-bold"
+                className="text-lg px-12 py-6 border-2 border-white text-gray-600 hover:bg-white hover:text-gray-900 transition-all duration-300 font-bold"
               >
                 View Pricing
               </Button>
@@ -623,8 +634,8 @@ export default function LandingPage() {
       <section className="relative py-20 bg-gradient-to-b from-gray-50 to-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <div className="inline-flex items-center space-x-2 bg-green-100 text-green-700 px-4 py-2 rounded-full text-sm font-semibold mb-6">
-              <Star className="h-4 w-4 fill-green-700" />
+            <div className="inline-flex items-center space-x-2 bg-green-100 text-gray-700 px-4 py-2 rounded-full text-sm font-semibold mb-6">
+              <Star className="h-4 w-4 fill-gray-700" />
               <span>Loved by Developers</span>
             </div>
             <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900">
@@ -665,7 +676,7 @@ export default function LandingPage() {
                   </div>
                   <p className="text-gray-700 mb-6 leading-relaxed italic">"{testimonial.quote}"</p>
                   <div className="flex items-center gap-3">
-                    <div className="w-12 h-12 rounded-full bg-gradient-to-r from-blue-400 to-purple-400 flex items-center justify-center text-white font-bold text-lg">
+                    <div className="w-12 h-12 rounded-full bg-gradient-to-r from-gray-600 to-gray-400 flex items-center justify-center text-white font-bold text-lg">
                       {testimonial.author[0]}
                     </div>
                     <div>
@@ -715,7 +726,7 @@ export default function LandingPage() {
                 answer: "Yes, on-premise deployment is available with our Enterprise plan. Contact our sales team for more information about dedicated infrastructure options."
               },
             ].map((faq, idx) => (
-              <Card key={idx} className="bg-gradient-to-br from-white to-gray-50 border-gray-200 hover:border-blue-300 hover:shadow-lg transition-all duration-300">
+              <Card key={idx} className="bg-gradient-to-br from-white to-gray-50 border-gray-200 hover:border-gray-300 hover:shadow-lg transition-all duration-300">
                 <CardContent className="pt-6">
                   <h3 className="text-lg font-bold text-gray-900 mb-3">{faq.question}</h3>
                   <p className="text-gray-600 leading-relaxed">{faq.answer}</p>
@@ -728,7 +739,7 @@ export default function LandingPage() {
             <p className="text-gray-600 mb-4">Still have questions?</p>
             <Button
               variant="outline"
-              className="border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white font-semibold px-8 transition-all duration-300"
+              className="border-2 border-gray-600 text-gray-600 hover:bg-gray-600 hover:text-white font-semibold px-8 transition-all duration-300"
             >
               Contact Support
             </Button>
@@ -744,11 +755,11 @@ export default function LandingPage() {
               <div className="flex items-center space-x-3 mb-4">
                 <div className="relative">
                   <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-500 rounded-xl blur-md opacity-50"></div>
-                  <div className="relative bg-gradient-to-r from-blue-600 to-purple-600 p-2 rounded-xl">
+                  <div className="relative bg-gradient-to-r from-gray-800 to-gray-600 p-2 rounded-xl">
                     <Shield className="h-6 w-6 text-white" />
                   </div>
                 </div>
-                <span className="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                <span className="text-xl font-bold bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent">
                   Guardrailz
                 </span>
               </div>
@@ -764,7 +775,7 @@ export default function LandingPage() {
                   <a
                     key={social.label}
                     href={social.href}
-                    className="w-10 h-10 rounded-lg bg-gray-100 hover:bg-gradient-to-r hover:from-blue-600 hover:to-purple-600 flex items-center justify-center text-gray-600 hover:text-white transition-all duration-300 group"
+                    className="w-10 h-10 rounded-lg bg-gray-100 hover:bg-gradient-to-r hover:from-gray-800 hover:to-gray-600 flex items-center justify-center text-gray-600 hover:text-white transition-all duration-300 group"
                     aria-label={social.label}
                   >
                     <social.icon className="h-5 w-5" />
@@ -778,7 +789,7 @@ export default function LandingPage() {
               <ul className="space-y-3">
                 {['Features', 'Profiles', 'Pricing', 'Documentation', 'API Reference'].map((item) => (
                   <li key={item}>
-                    <button className="text-gray-600 hover:text-blue-600 transition-colors text-sm font-medium">
+                    <button className="text-gray-600 hover:text-gray-900 transition-colors text-sm font-medium">
                       {item}
                     </button>
                   </li>
@@ -791,7 +802,7 @@ export default function LandingPage() {
               <ul className="space-y-3">
                 {['About Us', 'Blog', 'Careers', 'Contact', 'Partners'].map((item) => (
                   <li key={item}>
-                    <button className="text-gray-600 hover:text-blue-600 transition-colors text-sm font-medium">
+                    <button className="text-gray-600 hover:text-gray-900 transition-colors text-sm font-medium">
                       {item}
                     </button>
                   </li>
@@ -804,7 +815,7 @@ export default function LandingPage() {
               <ul className="space-y-3">
                 {['Privacy Policy', 'Terms of Service', 'Security', 'Compliance', 'Cookie Policy'].map((item) => (
                   <li key={item}>
-                    <button className="text-gray-600 hover:text-blue-600 transition-colors text-sm font-medium">
+                    <button className="text-gray-600 hover:text-gray-900 transition-colors text-sm font-medium">
                       {item}
                     </button>
                   </li>
@@ -819,13 +830,13 @@ export default function LandingPage() {
                 &copy; 2025 Guardrailz. All rights reserved.
               </p>
               <div className="flex items-center gap-6">
-                <button className="text-sm text-gray-600 hover:text-blue-600 transition-colors font-medium">
+                <button className="text-sm text-gray-600 hover:text-gray-900 transition-colors font-medium">
                   Status
                 </button>
-                <button className="text-sm text-gray-600 hover:text-blue-600 transition-colors font-medium">
+                <button className="text-sm text-gray-600 hover:text-gray-900 transition-colors font-medium">
                   Changelog
                 </button>
-                <button className="text-sm text-gray-600 hover:text-blue-600 transition-colors font-medium">
+                <button className="text-sm text-gray-600 hover:text-gray-900 transition-colors font-medium">
                   Support
                 </button>
               </div>
