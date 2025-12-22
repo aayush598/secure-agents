@@ -101,13 +101,13 @@ export default function LandingPage() {
                   <Button
                     variant="ghost"
                     onClick={() => router.push('/sign-in')}
-                    className="text-gray-700 hover:text-blue-600 hover:bg-blue-50"
+                    className="text-gray-700 hover:text-gray-600 hover:bg-gray-50"
                   >
                     Sign In
                   </Button>
                   <Button
                     onClick={() => router.push('/sign-up')}
-                    className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white shadow-lg shadow-blue-500/30 hover:shadow-xl hover:shadow-blue-500/40 transition-all duration-300"
+                    className="bg-gradient-to-r from-gray-600 to-gray-600 hover:from-gray-700 hover:to-gray-700 text-white shadow-lg shadow-gray-500/30 hover:shadow-xl hover:shadow-gray-500/40 transition-all duration-300"
                   >
                     Get Started Free
                   </Button>
@@ -132,7 +132,7 @@ export default function LandingPage() {
                 <button
                   key={item.label}
                   onClick={() => scrollToSection(item.href)}
-                  className="block w-full text-left text-gray-700 hover:text-blue-600 py-2 text-sm font-semibold"
+                  className="block w-full text-left text-gray-700 hover:text-gray-600 py-2 text-sm font-semibold"
                 >
                   {item.label}
                 </button>
@@ -150,13 +150,13 @@ export default function LandingPage() {
                     <Button
                       variant="ghost"
                       onClick={() => router.push('/sign-in')}
-                      className="w-full text-gray-700 hover:bg-blue-50"
+                      className="w-full text-gray-700 hover:bg-gray-50"
                     >
                       Sign In
                     </Button>
                     <Button
                       onClick={() => router.push('/sign-up')}
-                      className="w-full bg-gradient-to-r from-blue-600 to-purple-600"
+                      className="w-full bg-gradient-to-r from-gray-600 to-purple-600"
                     >
                       Get Started Free
                     </Button>
