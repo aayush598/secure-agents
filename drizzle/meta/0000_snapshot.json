@@ -1,5 +1,5 @@
 {
-  "id": "de968ee8-e4f2-4c75-b42c-ad31b52d15c6",
+  "id": "23519bb4-6039-48cc-9429-610647d96ca3",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -21,8 +21,8 @@
           "primaryKey": false,
           "notNull": true
         },
-        "key": {
-          "name": "key",
+        "key_encrypted": {
+          "name": "key_encrypted",
           "type": "text",
           "primaryKey": false,
           "notNull": true
@@ -66,6 +66,12 @@
           "type": "timestamp",
           "primaryKey": false,
           "notNull": false
+        },
+        "expires_at": {
+          "name": "expires_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
         }
       },
       "indexes": {},
@@ -86,11 +92,11 @@
       },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {
-        "api_keys_key_unique": {
-          "name": "api_keys_key_unique",
+        "api_keys_key_encrypted_unique": {
+          "name": "api_keys_key_encrypted_unique",
           "nullsNotDistinct": false,
           "columns": [
-            "key"
+            "key_encrypted"
           ]
         }
       },

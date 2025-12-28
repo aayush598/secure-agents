@@ -4,6 +4,9 @@ import { db } from '@/lib/db';
 import { users, apiKeys } from '@/lib/db/schema';
 import { eq, desc, and } from 'drizzle-orm';
 import { generateApiKey } from '@/lib/utils/api-key';
+import { redis } from '@/lib/redis';
+import { encrypt } from '@/lib/utils/crypto';
+
 
 // Helper to get or create user
 async function getOrCreateUser(clerkUser: any) {
@@ -76,13 +79,15 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const key = generateApiKey();
+    // const key = generateApiKey();
+    const plainKey = generateApiKey();
+    const keyEncrypted = encrypt(plainKey);
 
-    const [newKey] = await db
+    const [created] = await db
       .insert(apiKeys)
       .values({
         userId: dbUser.id,
-        key,
+        keyEncrypted,
         name,
         requestsPerMinute,
         requestsPerDay,
@@ -90,7 +95,23 @@ export async function POST(request: NextRequest) {
       })
       .returning();
 
-    return NextResponse.json({ apiKey: newKey });
+    await redis.hset(`apikey:${plainKey}`, {
+      id: created.id,
+      userId: dbUser.id,
+      active: "true",
+      rpm: requestsPerMinute.toString(),
+      rpd: requestsPerDay.toString(),
+    });
+
+    await redis.expire(`apikey:${plainKey}`, 86400);
+
+    return NextResponse.json({
+      apiKey: {
+        id: created.id,
+        name,
+        key: plainKey,
+      },
+    });
   } catch (error: any) {
     return NextResponse.json(
       { error: 'Failed to create API key', details: error.message },

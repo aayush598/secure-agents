@@ -29,7 +29,7 @@ export const profiles = pgTable('profiles', {
 export const apiKeys = pgTable('api_keys', {
   id: uuid('id').primaryKey().defaultRandom(),
   userId: text('user_id').notNull().references(() => users.id, { onDelete: 'cascade' }),
-  key: text('key').notNull().unique(),
+  keyEncrypted: text('key_encrypted').notNull().unique(),
   name: text('name').notNull(),
   isActive: boolean('is_active').default(true).notNull(),
   // Rate limiting

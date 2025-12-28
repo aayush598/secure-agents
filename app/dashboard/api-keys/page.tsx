@@ -25,7 +25,7 @@ import Link from "next/link";
 interface ApiKey {
   id: string;
   name: string;
-  key: string;
+  plaintextKey: string;
   requestsPerMinute: number;
   requestsPerDay: number;
   isActive: boolean;
@@ -54,35 +54,56 @@ export default function ApiKeysPage() {
   }, []);
 
   const fetchApiKeys = async () => {
-  setLoading(true);
-  try {
-    const [keysRes, usageRes] = await Promise.all([
-      fetch('/api/keys'),
-      fetch('/api/usage/keys'),
-    ]);
+    setLoading(true);
+    try {
+      const [keysRes, usageRes] = await Promise.all([
+        fetch('/api/keys'),
+        fetch('/api/usage/keys'),
+      ]);
 
-    if (!keysRes.ok || !usageRes.ok) {
-      throw new Error('Failed to load API data');
+      if (!keysRes.ok || !usageRes.ok) {
+        throw new Error('Failed to load API data');
+      }
+
+      
+
+
+      const { apiKeys } = await keysRes.json();
+      const usage = await usageRes.json();
+
+      const enriched = apiKeys.map((key: ApiKey) => ({
+        ...key,
+        usageToday: usage.perDay[key.id] ?? 0,
+        usageMinute: usage.perMinute[key.id] ?? 0,
+      }));
+
+      setApiKeys(enriched);
+    } catch (error) {
+      console.error(error);
+      alert('Failed to load API keys');
+    } finally {
+      setLoading(false);
     }
+  };
 
-    const { apiKeys } = await keysRes.json();
-    const usage = await usageRes.json();
+  const revealApiKey = async (id: string) => {
+      try {
+        const res = await fetch(`/api/keys/${id}/reveal`);
+        if (!res.ok) throw new Error("Failed to reveal key");
 
-    const enriched = apiKeys.map((key: ApiKey) => ({
-      ...key,
-      usageToday: usage.perDay[key.id] ?? 0,
-      usageMinute: usage.perMinute[key.id] ?? 0,
-    }));
+        const { key } = await res.json();
 
-    setApiKeys(enriched);
-  } catch (error) {
-    console.error(error);
-    alert('Failed to load API keys');
-  } finally {
-    setLoading(false);
-  }
-};
+        setApiKeys((prev) =>
+          prev.map((k) =>
+            k.id === id ? { ...k, plaintextKey: key } : k
+          )
+        );
 
+        setVisibleKeys((prev) => new Set(prev).add(id));
+      } catch {
+        alert("Failed to reveal API key");
+      }
+    };
 
   const createApiKey = async () => {
     if (!newKeyName.trim()) {
@@ -104,7 +125,10 @@ export default function ApiKeysPage() {
       }
 
       const data = await res.json();
-      setApiKeys([data.apiKey, ...apiKeys]);
+      setApiKeys([
+        { ...data.apiKey, plaintextKey: data.apiKey.key },
+        ...apiKeys,
+      ]);
       setNewKeyOpen(false);
       setNewKeyName('');
       
@@ -201,10 +225,6 @@ export default function ApiKeysPage() {
       }
       return newSet;
     });
-  };
-
-  const maskKey = (key: string) => {
-    return key.substring(0, 12) + '•'.repeat(20) + key.substring(key.length - 8);
   };
 
   const formatDate = (date: string | null) => {
@@ -399,13 +419,23 @@ export default function ApiKeysPage() {
                           <td className="py-4 px-4">
                             <div className="flex items-center space-x-2">
                               <code className="text-xs font-mono text-slate-600">
-                                {isVisible ? key.key : maskKey(key.key)}
+                                {isVisible && key.plaintextKey ? key.plaintextKey : "••••••••••••••••••••••••••••••"}
                               </code>
                               <Button
                                 variant="ghost"
                                 size="sm"
                                 className="h-7 w-7 p-0 hover:bg-slate-100"
-                                onClick={() => toggleKeyVisibility(key.id)}
+                                onClick={() => {
+                                  if (visibleKeys.has(key.id)) {
+                                    setVisibleKeys((prev) => {
+                                      const s = new Set(prev);
+                                      s.delete(key.id);
+                                      return s;
+                                    });
+                                  } else {
+                                    revealApiKey(key.id);
+                                  }
+                                }}
                               >
                                 {isVisible ? <EyeOff className="h-3.5 w-3.5" /> : <Eye className="h-3.5 w-3.5" />}
                               </Button>
@@ -413,7 +443,13 @@ export default function ApiKeysPage() {
                                 variant="ghost"
                                 size="sm"
                                 className="h-7 w-7 p-0 hover:bg-slate-100"
-                                onClick={() => copyToClipboard(key.key, key.id)}
+                                onClick={() => {
+                                  if (!key.plaintextKey) {
+                                    alert("Reveal the key first");
+                                    return;
+                                  }
+                                  copyToClipboard(key.plaintextKey, key.id);
+                                }}
                               >
                                 {copiedKey === key.id ? (
                                   <Check className="h-3.5 w-3.5 text-slate-900" />

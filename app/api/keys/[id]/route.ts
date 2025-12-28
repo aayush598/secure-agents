@@ -3,6 +3,7 @@ import { currentUser } from '@clerk/nextjs/server';
 import { db } from '@/lib/db';
 import { users, apiKeys } from '@/lib/db/schema';
 import { eq, and } from 'drizzle-orm';
+import { redis } from "@/lib/redis";
 
 // Helper to get or create user
 async function getOrCreateUser(clerkUser: any) {
@@ -30,33 +31,28 @@ async function getOrCreateUser(clerkUser: any) {
 }
 
 export async function DELETE(
-  request: NextRequest,
+  _: NextRequest,
   { params }: { params: { id: string } }
 ) {
-  try {
-    const user = await currentUser();
-    if (!user) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-    }
+  const user = await currentUser();
+  if (!user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
-    const dbUser = await getOrCreateUser(user);
+  const dbUser = await getOrCreateUser(user);
 
-    await db
-      .delete(apiKeys)
-      .where(
-        and(
-          eq(apiKeys.id, params.id), 
-          eq(apiKeys.userId, dbUser.id)
-        )
-      );
+  const [key] = await db
+    .select()
+    .from(apiKeys)
+    .where(and(eq(apiKeys.id, params.id), eq(apiKeys.userId, dbUser.id)))
+    .limit(1);
 
-    return NextResponse.json({ success: true });
-  } catch (error: any) {
-    return NextResponse.json(
-      { error: 'Failed to delete API key', details: error.message },
-      { status: 500 }
-    );
-  }
+  if (!key) return NextResponse.json({ success: true });
+
+  await db.delete(apiKeys).where(eq(apiKeys.id, params.id));
+
+  // 🔥 delete Redis runtime key
+  await redis.del(`apikey:*:${params.id}`); // OR track key->id mapping
+
+  return NextResponse.json({ success: true });
 }
 
 export async function PATCH(

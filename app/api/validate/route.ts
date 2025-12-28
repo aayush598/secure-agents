@@ -7,6 +7,7 @@ import { and, eq } from 'drizzle-orm';
 import { checkRateLimit } from '@/lib/rate-limit';
 import { runGuardrails } from '@/lib/guardrails/service';
 import { PerfTracker } from '@/lib/perf';
+import { redis } from "@/lib/redis";
 
 
 export async function POST(req: NextRequest) {
@@ -19,11 +20,17 @@ export async function POST(req: NextRequest) {
     }
 
     perf.start("api_key_lookup");
-    const [key] = await db
-      .select()
-      .from(apiKeys)
-      .where(and(eq(apiKeys.key, apiKey), eq(apiKeys.isActive, true)))
-      .limit(1);
+    const keyData = await redis.hgetall(`apikey:${apiKey}`);
+    if (!keyData || keyData.active !== "true") {
+      return NextResponse.json({ error: "Invalid API key" }, { status: 401 });
+    }
+
+    const key = {
+      id: keyData.id,
+      userId: keyData.userId,
+      requestsPerMinute: Number(keyData.rpm),
+      requestsPerDay: Number(keyData.rpd),
+    };
     perf.end("api_key_lookup");
 
     if (!key) {
@@ -31,7 +38,14 @@ export async function POST(req: NextRequest) {
     }
 
     perf.start("rate_limit_check");
-    const rate = await checkRateLimit(key.id, key.userId);
+    const rate = await checkRateLimit({
+      apiKeyId: key.id,
+      userId: key.userId,
+      apiRpm: key.requestsPerMinute,
+      apiRpd: key.requestsPerDay,
+      userRpm: 100,      // can also come from Redis later
+      userRpd: 10000,
+    });
     perf.end("rate_limit_check");
 
     if (!rate.allowed) {
