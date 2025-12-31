@@ -89,46 +89,6 @@ export default function DashboardPage() {
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-950 dark:to-slate-900">
       <Toaster />
 
-      {/* Header */}
-      <div className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border-b border-slate-200 dark:border-slate-800 sticky top-0 z-50">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex justify-between items-center">
-            <div className="flex items-center space-x-4">
-              <Link href="/" className="flex items-center space-x-3 group">
-                <div className="relative">
-                  <Shield className="h-8 w-8 text-indigo-600 dark:text-indigo-400 group-hover:scale-110 transition-transform" />
-                  <div className="absolute inset-0 bg-indigo-600 blur-lg opacity-20 group-hover:opacity-40 transition-opacity"></div>
-                </div>
-                <span className="text-2xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 dark:from-indigo-400 dark:to-purple-400 bg-clip-text text-transparent">
-                  Guardrailz
-                </span>
-              </Link>
-            </div>
-            
-            <div className="flex items-center space-x-4">
-              <nav className="hidden md:flex items-center space-x-2">
-                <Button variant="ghost" className="text-indigo-600 font-medium" asChild>
-                  <Link href="/dashboard">Overview</Link>
-                </Button>
-                <Button variant="ghost" asChild>
-                  <Link href="/dashboard/api-keys">API Keys</Link>
-                </Button>
-                <Button variant="ghost" asChild>
-                  <Link href="/dashboard/profiles">Profiles</Link>
-                </Button>
-                <Button variant="ghost" asChild>
-                  <Link href="/dashboard/playground">Playground</Link>
-                </Button>
-                <Button variant="ghost" asChild>
-                  <Link href="/dashboard/analytics">Analytics</Link>
-                </Button>
-              </nav>
-              <UserButton afterSignOutUrl="/" />
-            </div>
-          </div>
-        </div>
-      </div>
-
       <div className="container mx-auto px-4 py-8">
         {/* Welcome Section */}
         <div className="mb-8">
