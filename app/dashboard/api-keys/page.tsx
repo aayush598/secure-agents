@@ -14,5 +14,12 @@ export default async function ApiKeysPage() {
     .where(eq(apiKeys.userId, user.id))
     .orderBy(apiKeys.createdAt);
 
-  return <ApiKeysClient initialKeys={keys} />;
+  const serializedKeys = keys.map((k) => ({
+    ...k,
+    createdAt: k.createdAt.toISOString(),
+    lastUsedAt: k.lastUsedAt ? k.lastUsedAt.toISOString() : null,
+    expiresAt: k.expiresAt ? k.expiresAt.toISOString() : null,
+  }));
+
+  return <ApiKeysClient initialKeys={serializedKeys} />;
 }

@@ -31,6 +31,7 @@ interface ApiKey {
   isActive: boolean;
   createdAt: string;
   lastUsedAt: string | null;
+  expiresAt: string | null; 
 }
 
 export default function ApiKeysClient({
