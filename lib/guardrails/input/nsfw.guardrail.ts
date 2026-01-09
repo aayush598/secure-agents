@@ -80,7 +80,7 @@ export class NSFWAdvancedGuardrail extends BaseGuardrail<NSFWGuardrailConfig> {
   private allowlist: Set<string>;
 
   constructor(config: NSFWGuardrailConfig = {}) {
-    super('NSFWAdvancedGuardrail', 'input', config);
+    super('NSFWAdvanced', 'input', config);
 
     this.blocklist = new Set(config.customBlocklist ?? []);
     this.allowlist = new Set(config.customAllowlist ?? []);
