@@ -15,8 +15,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { usePathname } from 'next/navigation';
-
+import { useSelectedLayoutSegment } from 'next/navigation';
 
 export default function DashboardLayout({
   children,
@@ -24,14 +23,16 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const pathname = usePathname();
+  const segment = useSelectedLayoutSegment();
 
   const isActiveRoute = (href: string) => {
-    if (href === '/dashboard') {
-      return pathname === '/dashboard';
-    }
-    return pathname.startsWith(href);
-  };
+  if (href === '/dashboard') {
+    return segment === null;
+  }
+
+  return href.startsWith(`/dashboard/${segment}`);
+};
+
 
   const NavLink = ({
     href,
@@ -47,6 +48,7 @@ export default function DashboardLayout({
     return (
       <Link
         href={href}
+        prefetch
         className={`
           group relative flex items-center space-x-3 px-3 py-2.5 rounded-xl text-sm font-medium
           transition-all duration-200
