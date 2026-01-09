@@ -1,6 +1,4 @@
-import { GuardrailMeta } from './types';
-
-export const GUARDRAILS: GuardrailMeta[] = [
+export const GUARDRAILS = [
   {
     id: 'pii-detection',
     slug: 'pii-detection',
@@ -9,7 +7,7 @@ export const GUARDRAILS: GuardrailMeta[] = [
     category: 'Input Validation',
     tags: ['input', 'privacy', 'compliance'],
     stage: 'completed',
-    icon: '/icons/pii.svg',
+    icon: 'shield',
     stats: { views: 1240, likes: 312, shares: 88 },
   },
   {
@@ -20,7 +18,7 @@ export const GUARDRAILS: GuardrailMeta[] = [
     category: 'Prompt Security',
     tags: ['input', 'security'],
     stage: 'completed',
-    icon: '/icons/shield.svg',
+    icon: 'lock',
     stats: { views: 980, likes: 201, shares: 65 },
   },
   {
@@ -31,7 +29,7 @@ export const GUARDRAILS: GuardrailMeta[] = [
     category: 'Prompt Security',
     tags: ['input', 'security'],
     stage: 'development',
-    icon: '/icons/ai.svg',
+    icon: 'grid',
     stats: { views: 410, likes: 44, shares: 9 },
   },
 ];

@@ -19,6 +19,7 @@ import {
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { HubIcon } from './icon-map';
 
 type SortBy = 'views' | 'likes' | 'shares' | 'name';
 
@@ -263,10 +264,9 @@ export default function HubPage() {
                     <div className="flex items-start justify-between mb-4">
                       <div className="flex items-center gap-3">
                         <div className="bg-slate-100 p-2 rounded-xl group-hover:scale-110 transition-transform">
-                          <img
-                            src={item.icon}
-                            alt={item.name}
-                            className="h-8 w-8"
+                          <HubIcon
+                            name={item.icon}
+                            className="h-8 w-8 text-slate-700"
                           />
                         </div>
                         <Badge

@@ -3,6 +3,7 @@ import { ArrowLeft, Eye, Heart, Share2, Tag, Shield, Clock, TrendingUp } from 'l
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { HubIcon } from '@/app/hub/icon-map';
 
 export default function GuardrailPage({ params }: { params: { slug: string } }) {
   const guardrail = GUARDRAILS.find(g => g.slug === params.slug);
@@ -32,7 +33,10 @@ export default function GuardrailPage({ params }: { params: { slug: string } }) 
             
             <div className="relative flex items-start gap-6">
               <div className="bg-white/10 backdrop-blur-xl p-4 rounded-2xl border border-white/20 shadow-2xl">
-                <img src={guardrail.icon} className="h-16 w-16" alt={guardrail.name} />
+                <HubIcon
+                  name={guardrail.icon}
+                  className="h-16 w-16 text-white"
+                />
               </div>
               
               <div className="flex-1">

@@ -5,6 +5,7 @@ import { GUARDRAILS } from '@/lib/hub/guardrails';
 import { Eye, Heart, Share2, Shield, ArrowLeft, CheckCircle, Package, Tag } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { HubIcon } from '@/app/hub/icon-map';
 
 export default function ProfileDetailPage({
   params,
@@ -46,10 +47,9 @@ export default function ProfileDetailPage({
             <div className="relative">
               <div className="flex items-start gap-6 mb-6">
                 <div className="bg-white/10 backdrop-blur-xl p-5 rounded-2xl border border-white/20 shadow-2xl">
-                  <img
-                    src={profile.icon}
-                    alt={profile.name}
-                    className="h-20 w-20"
+                  <HubIcon
+                    name={profile.icon}
+                    className="h-20 w-20 text-white"
                   />
                 </div>
 
@@ -190,10 +190,9 @@ export default function ProfileDetailPage({
                   {/* Header */}
                   <div className="flex items-start justify-between mb-4">
                     <div className="bg-slate-100 p-3 rounded-xl group-hover:scale-110 transition-transform">
-                      <img
-                        src={guardrail!.icon}
-                        className="h-10 w-10"
-                        alt={guardrail!.name}
+                      <HubIcon
+                        name={guardrail!.icon}
+                        className="h-10 w-10 text-slate-700"
                       />
                     </div>
                     <Badge

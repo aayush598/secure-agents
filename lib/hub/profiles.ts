@@ -1,18 +1,13 @@
-import { ProfileMeta } from './types';
-
-export const PROFILES: ProfileMeta[] = [
+export const PROFILES = [
   {
     id: 'default',
     slug: 'default',
     name: 'Default Profile',
     description: 'Basic security and safety guardrails.',
-    guardrails: [
-      'pii-detection',
-      'prompt-injection',
-    ],
+    guardrails: ['pii-detection', 'prompt-injection'],
     tags: ['input', 'security'],
     stage: 'completed',
-    icon: '/icons/default.svg',
+    icon: 'package',
     stats: { views: 2200, likes: 540, shares: 140 },
   },
   {
@@ -20,13 +15,10 @@ export const PROFILES: ProfileMeta[] = [
     slug: 'enterprise-security',
     name: 'Enterprise Security',
     description: 'Enterprise-grade security with strict controls.',
-    guardrails: [
-      'pii-detection',
-      'prompt-injection',
-    ],
+    guardrails: ['pii-detection', 'prompt-injection'],
     tags: ['enterprise', 'security'],
     stage: 'maintenance',
-    icon: '/icons/enterprise.svg',
+    icon: 'shield',
     stats: { views: 3100, likes: 890, shares: 230 },
   },
   {
@@ -37,7 +29,7 @@ export const PROFILES: ProfileMeta[] = [
     guardrails: [],
     tags: ['content-safety'],
     stage: 'development',
-    icon: '/icons/child.svg',
+    icon: 'heart',
     stats: { views: 780, likes: 102, shares: 33 },
   },
 ];

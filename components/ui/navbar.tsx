@@ -23,12 +23,11 @@ export function MarketingNavbar() {
   }, []);
 
   const navItems = [
-    { label: 'Features', href: '#features' },
-    { label: 'Profiles', href: '#profiles' },
-    { label: 'How It Works', href: '#how-it-works' },
-    { label: 'Pricing', href: '#pricing' },
-    { label: 'Docs', href: '/docs' },
+    {label: 'Home', href: '/' },
     {label: 'Hub', href: '/hub' },
+    { label: 'Blogs', href: '/blogs' },
+    { label: 'Pricing', href: '/pricing' },
+    { label: 'Docs', href: '/docs' },
   ];
 
   const navigate = (href: string) => {
