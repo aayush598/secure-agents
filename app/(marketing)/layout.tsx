@@ -1,6 +1,7 @@
-import './globals.css';
+import './../globals.css';
 import { ClerkProvider } from '@clerk/nextjs';
 import { Inter, Plus_Jakarta_Sans } from 'next/font/google';
+import { MarketingNavbar } from '@/components/ui/navbar';
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -26,7 +27,7 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en" className={`${inter.variable} ${jakarta.variable}`}>
         <body className={`${inter.className} antialiased`}>
-          {children}</body>
+          <MarketingNavbar/>{children}</body>
       </html>
     </ClerkProvider>
   );

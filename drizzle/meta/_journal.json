@@ -5,8 +5,15 @@
     {
       "idx": 0,
       "version": "7",
-      "when": 1766899912825,
-      "tag": "0000_strong_thunderbolts",
+      "when": 1767872241515,
+      "tag": "0000_silent_mandroid",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1767874217456,
+      "tag": "0001_magical_rattler",
       "breakpoints": true
     }
   ]

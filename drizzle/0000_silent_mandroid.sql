@@ -1,7 +1,7 @@
 CREATE TABLE "api_keys" (
 	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
 	"user_id" text NOT NULL,
-	"key_encrypted" text NOT NULL,
+	"key" text NOT NULL,
 	"name" text NOT NULL,
 	"is_active" boolean DEFAULT true NOT NULL,
 	"requests_per_minute" integer DEFAULT 100 NOT NULL,
@@ -9,7 +9,7 @@ CREATE TABLE "api_keys" (
 	"created_at" timestamp DEFAULT now() NOT NULL,
 	"last_used_at" timestamp,
 	"expires_at" timestamp,
-	CONSTRAINT "api_keys_key_encrypted_unique" UNIQUE("key_encrypted")
+	CONSTRAINT "api_keys_key_unique" UNIQUE("key")
 );
 --> statement-breakpoint
 CREATE TABLE "guardrail_executions" (
