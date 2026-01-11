@@ -13,6 +13,7 @@ import { PromptInjectionSignatureGuardrail } from './input/prompt-injection.guar
 import { SystemPromptLeakGuardrail } from './input/system-prompt-leak.guardrail';
 import { CrossContextManipulationGuardrail } from './input/cross-context-manipulation.guardrail';
 import { JailbreakPatternGuardrail } from './input/jailbreak-pattern.guardrail';
+import { RoleplayInjectionGuardrail } from './input/roleplay-injection.guardrail';
 
 import { OutputPIIRedactionGuardrail } from './output/pii-redaction.guardrail';
 import { ToolAccessControlGuardrail } from './tool/tool-access.guardrail';
@@ -37,6 +38,7 @@ guardrailRegistry.register(
   (c) => new CrossContextManipulationGuardrail(c),
 );
 guardrailRegistry.register('JailbreakPattern', (c) => new JailbreakPatternGuardrail(c));
+guardrailRegistry.register('RoleplayInjection', (c) => new RoleplayInjectionGuardrail(c));
 
 // Output
 guardrailRegistry.register('OutputPIIRedaction', (c) => new OutputPIIRedactionGuardrail(c));
