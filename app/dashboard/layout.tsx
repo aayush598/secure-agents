@@ -15,7 +15,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { useSelectedLayoutSegment } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 
 export default function DashboardLayout({
   children,
@@ -23,15 +23,14 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const segment = useSelectedLayoutSegment();
+  const pathname = usePathname();
 
   const isActiveRoute = (href: string) => {
-  if (href === '/dashboard') {
-    return segment === null;
-  }
-
-  return href.startsWith(`/dashboard/${segment}`);
-};
+    if (href === '/dashboard') {
+      return pathname === '/dashboard';
+    }
+    return pathname.startsWith(href);
+  };
 
 
   const NavLink = ({
@@ -82,10 +81,11 @@ export default function DashboardLayout({
       <aside
         className={`
           fixed lg:sticky top-0 left-0 z-40 h-screen w-72 
-          bg-white border-r border-slate-200 
+          bg-white border-r border-slate-200
           transition-transform duration-300 ease-in-out
-          ${sidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"}
-          shadow-xl lg:shadow-none
+          lg:transition-none
+          ${sidebarOpen ? "translate-x-0" : "-translate-x-full"}
+          shadow-xl lg:shadow-none lg:translate-x-0
         `}
       >
         <div className="flex flex-col h-full">
