@@ -20,6 +20,7 @@ import { OutputPIIRedactionGuardrail } from './output/pii-redaction.guardrail';
 import { ToolAccessControlGuardrail } from './tool/tool-access.guardrail';
 import { SecretLeakOutputGuardrail } from './output/secret-leak-output.guardrail';
 import { InternalDataLeakGuardrail } from './output/internal-data-leak.guardrail';
+import { HallucinationRiskGuardrail } from './output/hallucination-risk.guardrail';
 
 // Input
 guardrailRegistry.register('InputSize', (c) => new InputSizeGuardrail(c));
@@ -49,3 +50,4 @@ guardrailRegistry.register('OutputPIIRedaction', (c) => new OutputPIIRedactionGu
 guardrailRegistry.register('ToolAccess', (c) => new ToolAccessControlGuardrail(c));
 guardrailRegistry.register('SecretLeakOutput', (c) => new SecretLeakOutputGuardrail(c));
 guardrailRegistry.register('InternalDataLeak', (c) => new InternalDataLeakGuardrail(c));
+guardrailRegistry.register('HallucinationRisk', (c) => new HallucinationRiskGuardrail(c));
