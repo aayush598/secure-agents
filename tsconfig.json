@@ -32,7 +32,8 @@
     ".next/dev/types/**/*.ts",
     "lint-staged.config.cjs",
     "commitlint.config.cjs",
-    "prettier.config.cjs"
+    "prettier.config.cjs",
+    "postcss.config.cjs"
   ],
   "exclude": ["node_modules"]
 }
