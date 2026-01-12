@@ -16,6 +16,7 @@ import { JailbreakPatternGuardrail } from './input/jailbreak-pattern.guardrail';
 import { RoleplayInjectionGuardrail } from './input/roleplay-injection.guardrail';
 import { OverrideInstructionGuardrail } from './input/override-instruction.guardrail';
 import { RightToErasureGuardrail } from './input/right-to-erasure.guardrail';
+import { UserConsentValidationGuardrail } from './input/user-consent.guardrail';
 
 import { OutputPIIRedactionGuardrail } from './output/pii-redaction.guardrail';
 import { ToolAccessControlGuardrail } from './tool/tool-access.guardrail';
@@ -57,6 +58,7 @@ guardrailRegistry.register('JailbreakPattern', (c) => new JailbreakPatternGuardr
 guardrailRegistry.register('RoleplayInjection', (c) => new RoleplayInjectionGuardrail(c));
 guardrailRegistry.register('OverrideInstruction', (c) => new OverrideInstructionGuardrail(c));
 guardrailRegistry.register('RightToErasure', (c) => new RightToErasureGuardrail(c));
+guardrailRegistry.register('UserConsentValidation', (c) => new UserConsentValidationGuardrail(c));
 
 // Output
 guardrailRegistry.register('OutputPIIRedaction', (c) => new OutputPIIRedactionGuardrail(c));
