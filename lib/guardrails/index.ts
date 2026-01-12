@@ -45,6 +45,7 @@ import { FileWriteRestrictionGuardrail } from './tool/file-write-restriction.gua
 import { ApiRateLimitGuardrail } from './tool/api-rate-limit.guardrail';
 import { DestructiveToolCallGuardrail } from './tool/destructive-tool-call.guardrail';
 import { CommandInjectionOutputGuardrail } from './output/command-injection.guardrail';
+import { RateLimitGuardrail } from './operational/rate-limit.guardrail';
 
 // Input
 guardrailRegistry.register('InputSize', (c) => new InputSizeGuardrail(c));
@@ -103,3 +104,12 @@ guardrailRegistry.register('FileWriteRestriction', (c) => new FileWriteRestricti
 guardrailRegistry.register('ApiRateLimit', (c) => new ApiRateLimitGuardrail(c));
 guardrailRegistry.register('DestructiveToolCall', (c) => new DestructiveToolCallGuardrail(c));
 guardrailRegistry.register('CommandInjectionOutput', (c) => new CommandInjectionOutputGuardrail(c));
+guardrailRegistry.register(
+  'RateLimit',
+  (c) =>
+    new RateLimitGuardrail({
+      limit: c?.limit ?? 100,
+      windowMs: c?.windowMs ?? 60_000,
+      warnThreshold: c?.warnThreshold ?? 10,
+    }),
+);
