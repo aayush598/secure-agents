@@ -28,6 +28,7 @@ import { SandboxedOutputGuardrail } from './output/sandboxed-output.guardrail';
 import { QualityThresholdGuardrail } from './output/quality-threshold.guardrail';
 
 import { TelemetryEnforcementGuardrail } from './operational/telemetry-enforcement.guardrail';
+import { ModelVersionPinGuardrail } from './operational/model-version-pin.guardrail';
 
 // Input
 guardrailRegistry.register('InputSize', (c) => new InputSizeGuardrail(c));
@@ -66,3 +67,4 @@ guardrailRegistry.register('QualityThreshold', (c) => new QualityThresholdGuardr
 
 // Operational
 guardrailRegistry.register('TelemetryEnforcement', (c) => new TelemetryEnforcementGuardrail(c));
+guardrailRegistry.register('ModelVersionPin', (c) => new ModelVersionPinGuardrail(c));
