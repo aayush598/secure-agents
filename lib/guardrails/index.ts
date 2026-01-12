@@ -46,6 +46,7 @@ import { ApiRateLimitGuardrail } from './tool/api-rate-limit.guardrail';
 import { DestructiveToolCallGuardrail } from './tool/destructive-tool-call.guardrail';
 import { CommandInjectionOutputGuardrail } from './output/command-injection.guardrail';
 import { RateLimitGuardrail } from './operational/rate-limit.guardrail';
+import { GDPRDataMinimizationGuardrail } from './input/gdpr-data-minimization.guardrail';
 
 // Input
 guardrailRegistry.register('InputSize', (c) => new InputSizeGuardrail(c));
@@ -113,3 +114,4 @@ guardrailRegistry.register(
       warnThreshold: c?.warnThreshold ?? 10,
     }),
 );
+guardrailRegistry.register('GDPRDataMinimization', (c) => new GDPRDataMinimizationGuardrail(c));
