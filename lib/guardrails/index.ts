@@ -28,6 +28,7 @@ import { OutputSchemaValidationGuardrail } from './output/output-schema-validati
 import { CitationRequiredGuardrail } from './output/citation-required.guardrail';
 import { SandboxedOutputGuardrail } from './output/sandboxed-output.guardrail';
 import { QualityThresholdGuardrail } from './output/quality-threshold.guardrail';
+import { EnvVarLeakGuardrail } from './output/env-var-leak.guardrail';
 
 import { TelemetryEnforcementGuardrail } from './operational/telemetry-enforcement.guardrail';
 import { ModelVersionPinGuardrail } from './operational/model-version-pin.guardrail';
@@ -59,6 +60,7 @@ guardrailRegistry.register('RoleplayInjection', (c) => new RoleplayInjectionGuar
 guardrailRegistry.register('OverrideInstruction', (c) => new OverrideInstructionGuardrail(c));
 guardrailRegistry.register('RightToErasure', (c) => new RightToErasureGuardrail(c));
 guardrailRegistry.register('UserConsentValidation', (c) => new UserConsentValidationGuardrail(c));
+guardrailRegistry.register('EnvVarLeak', (c) => new EnvVarLeakGuardrail(c));
 
 // Output
 guardrailRegistry.register('OutputPIIRedaction', (c) => new OutputPIIRedactionGuardrail(c));
