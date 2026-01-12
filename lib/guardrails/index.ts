@@ -32,6 +32,8 @@ import { TelemetryEnforcementGuardrail } from './operational/telemetry-enforceme
 import { ModelVersionPinGuardrail } from './operational/model-version-pin.guardrail';
 import { CostThresholdGuardrail } from './operational/cost-threshold.guardrail';
 
+import { RetentionCheckGuardrail } from './general/retention-check.guardrail';
+
 // Input
 guardrailRegistry.register('InputSize', (c) => new InputSizeGuardrail(c));
 guardrailRegistry.register('SecretsInInput', (c) => new SecretsInInputGuardrail(c));
@@ -72,3 +74,6 @@ guardrailRegistry.register('QualityThreshold', (c) => new QualityThresholdGuardr
 guardrailRegistry.register('TelemetryEnforcement', (c) => new TelemetryEnforcementGuardrail(c));
 guardrailRegistry.register('ModelVersionPin', (c) => new ModelVersionPinGuardrail(c));
 guardrailRegistry.register('CostThreshold', (c) => new CostThresholdGuardrail(c));
+
+// General
+guardrailRegistry.register('RetentionCheck', (c) => new RetentionCheckGuardrail(c));
