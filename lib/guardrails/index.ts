@@ -42,6 +42,7 @@ import { IAMPermissionGuardrail } from './tool/iam-permission.guardrail';
 import { ApiKeyRotationTriggerGuardrail } from './security/api-key-rotation.guardrail';
 import { SecretsInLogsGuardrail } from './output/secrets-in-logs.guardrail';
 import { FileWriteRestrictionGuardrail } from './tool/file-write-restriction.guardrail';
+import { ApiRateLimitGuardrail } from './tool/api-rate-limit.guardrail';
 
 // Input
 guardrailRegistry.register('InputSize', (c) => new InputSizeGuardrail(c));
@@ -97,3 +98,4 @@ guardrailRegistry.register('ApiKeyRotationTrigger', (c) => new ApiKeyRotationTri
 
 guardrailRegistry.register('SecretsInLogs', (c) => new SecretsInLogsGuardrail(c));
 guardrailRegistry.register('FileWriteRestriction', (c) => new FileWriteRestrictionGuardrail(c));
+guardrailRegistry.register('ApiRateLimit', (c) => new ApiRateLimitGuardrail(c));
