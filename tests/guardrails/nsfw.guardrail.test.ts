@@ -1,6 +1,6 @@
 // tests/guardrails/nsfw.guardrail.test.ts
 import { describe, it, expect } from 'vitest';
-import { NSFWAdvancedGuardrail } from '@/lib/guardrails/input/nsfw.guardrail';
+import { NSFWAdvancedGuardrail } from '@/modules/guardrails/guards/input/nsfw.guardrail';
 
 describe('NSFWAdvancedGuardrail', () => {
   it('allows safe content', () => {

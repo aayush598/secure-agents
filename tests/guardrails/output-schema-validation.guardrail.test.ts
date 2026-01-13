@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { OutputSchemaValidationGuardrail } from '@/lib/guardrails/output/output-schema-validation.guardrail';
+import { OutputSchemaValidationGuardrail } from '@/modules/guardrails/guards/output/output-schema-validation.guardrail';
 
 const schema = {
   type: 'object',

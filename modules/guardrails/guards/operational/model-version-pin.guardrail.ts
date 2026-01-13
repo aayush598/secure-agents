@@ -41,7 +41,7 @@ export class ModelVersionPinGuardrail extends BaseGuardrail<ModelVersionPinConfi
     super('ModelVersionPin', 'general', resolved);
 
     if (this.config.allowedModels.length === 0) {
-      throw new Error('ModelVersionPinGuardrail requires at least one allowed model');
+      throw new Error('ModelVersionPinGuardrail requires allowedModels');
     }
   }
 

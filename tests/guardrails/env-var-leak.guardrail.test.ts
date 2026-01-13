@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { EnvVarLeakGuardrail } from '@/lib/guardrails/output/env-var-leak.guardrail';
+import { EnvVarLeakGuardrail } from '@/modules/guardrails/guards/output/env-var-leak.guardrail';
 
 describe('EnvVarLeakGuardrail', () => {
   it('allows output with no env vars', () => {

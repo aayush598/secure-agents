@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { HallucinationRiskGuardrail } from '@/lib/guardrails/output/hallucination-risk.guardrail';
+import { HallucinationRiskGuardrail } from '@/modules/guardrails/guards/output/hallucination-risk.guardrail';
 
 describe('HallucinationRiskGuardrail', () => {
   it('allows factual content with citation', () => {

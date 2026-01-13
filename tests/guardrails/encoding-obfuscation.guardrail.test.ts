@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { EncodingObfuscationGuardrail } from '@/lib/guardrails/input/encoding-obfuscation.guardrail';
+import { EncodingObfuscationGuardrail } from '@/modules/guardrails/guards/input/encoding-obfuscation.guardrail';
 
 describe('EncodingObfuscationGuardrail', () => {
   it('allows clean input', () => {

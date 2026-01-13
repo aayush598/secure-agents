@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { RetentionCheckGuardrail } from '@/lib/guardrails/general/retention-check.guardrail';
+import { RetentionCheckGuardrail } from '@/modules/guardrails/guards/general/retention-check.guardrail';
 
 describe('RetentionCheckGuardrail', () => {
   it('allows when no retention metadata is present', () => {

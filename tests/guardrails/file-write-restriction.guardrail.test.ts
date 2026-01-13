@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { FileWriteRestrictionGuardrail } from '@/lib/guardrails/tool/file-write-restriction.guardrail';
+import { FileWriteRestrictionGuardrail } from '@/modules/guardrails/guards/tool/file-write-restriction.guardrail';
 
 describe('FileWriteRestrictionGuardrail', () => {
   it('allows when no tool context exists', () => {

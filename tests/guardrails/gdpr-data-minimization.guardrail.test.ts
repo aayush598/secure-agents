@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { GDPRDataMinimizationGuardrail } from '@/lib/guardrails/input/gdpr-data-minimization.guardrail';
+import { GDPRDataMinimizationGuardrail } from '@/modules/guardrails/guards/input/gdpr-data-minimization.guardrail';
 
 describe('GDPRDataMinimizationGuardrail', () => {
   it('allows minimal personal data', () => {

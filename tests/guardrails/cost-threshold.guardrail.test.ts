@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { CostThresholdGuardrail } from '@/lib/guardrails/operational/cost-threshold.guardrail';
+import { CostThresholdGuardrail } from '@/modules/guardrails/guards/operational/cost-threshold.guardrail';
 
 describe('CostThresholdGuardrail', () => {
   const baseConfig = {

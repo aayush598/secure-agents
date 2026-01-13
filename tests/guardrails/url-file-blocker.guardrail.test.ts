@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { UrlFileBlockerGuardrail } from '@/lib/guardrails/input/url-file-blocker.guardrail';
+import { UrlFileBlockerGuardrail } from '@/modules/guardrails/guards/input/url-file-blocker.guardrail';
 
 describe('UrlFileBlockerGuardrail', () => {
   it('allows normal text', () => {

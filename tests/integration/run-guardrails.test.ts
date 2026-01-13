@@ -3,7 +3,7 @@ import { describe, it, expect } from 'vitest';
 import { runGuardrails } from '@/modules/guardrails/service/run-guardrails';
 
 // IMPORTANT: this side-effect import registers guardrails
-import '@/lib/guardrails';
+import '@/modules/guardrails';
 
 describe('runGuardrails (integration)', () => {
   it('executes registered guardrails end-to-end', async () => {

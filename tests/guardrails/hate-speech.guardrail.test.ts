@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { HateSpeechGuardrail } from '@/lib/guardrails/input/hate-speech.guardrail';
+import { HateSpeechGuardrail } from '@/modules/guardrails/guards/input/hate-speech.guardrail';
 
 describe('HateSpeechGuardrail', () => {
   it('allows neutral content', () => {

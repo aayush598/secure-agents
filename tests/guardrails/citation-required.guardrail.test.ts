@@ -3,7 +3,7 @@ import {
   CitationRequiredGuardrail,
   detectFactualClaims,
   extractCitations,
-} from '@/lib/guardrails/output/citation-required.guardrail';
+} from '@/modules/guardrails/guards/output/citation-required.guardrail';
 
 describe('CitationRequiredGuardrail', () => {
   it('allows output with no factual claims', () => {

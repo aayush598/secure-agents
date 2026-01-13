@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { MedicalAdviceGuardrail } from '@/lib/guardrails/content/medical-advice.guardrail';
+import { MedicalAdviceGuardrail } from '@/modules/guardrails/guards/content/medical-advice.guardrail';
 
 describe('MedicalAdviceGuardrail', () => {
   it('allows general health information', () => {

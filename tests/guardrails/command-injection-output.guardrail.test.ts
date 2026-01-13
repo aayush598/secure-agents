@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { CommandInjectionOutputGuardrail } from '@/lib/guardrails/output/command-injection.guardrail';
+import { CommandInjectionOutputGuardrail } from '@/modules/guardrails/guards/output/command-injection.guardrail';
 
 describe('CommandInjectionOutputGuardrail', () => {
   it('allows safe text', () => {

@@ -7,7 +7,7 @@ import {
   AgentRole,
   IdentityStrength,
   PrincipalType,
-} from '@/lib/guardrails/tool/tool-access.guardrail';
+} from '@/modules/guardrails/guards/tool/tool-access.guardrail';
 
 describe('ToolAccessControlGuardrail', () => {
   it('allows when no tool context exists', () => {

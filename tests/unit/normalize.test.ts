@@ -1,25 +1,25 @@
 // tests/unit/normalize.test.ts
 import { describe, it, expect } from 'vitest';
-import { normalizeGuardrailDescriptor } from '@/lib/guardrails/normalize';
+import { normalizeDescriptor } from '@/modules/guardrails/descriptors/normalize';
 
 describe('normalizeGuardrailDescriptor', () => {
   it('normalizes canonical object', () => {
-    const d = normalizeGuardrailDescriptor({ name: 'InputSize', config: { max: 10 } });
+    const d = normalizeDescriptor({ name: 'InputSize', config: { max: 10 } });
     expect(d).toEqual({ name: 'InputSize', config: { max: 10 } });
   });
 
   it('normalizes legacy class format', () => {
-    const d = normalizeGuardrailDescriptor({ class: 'NSFWAdvancedGuardrail', config: {} });
+    const d = normalizeDescriptor({ class: 'NSFWAdvancedGuardrail', config: {} });
     expect(d?.name).toBe('NSFWAdvanced');
   });
 
   it('normalizes legacy string format', () => {
-    const d = normalizeGuardrailDescriptor('SecretsInInputGuardrail');
+    const d = normalizeDescriptor('SecretsInInputGuardrail');
     expect(d).toEqual({ name: 'SecretsInInput' });
   });
 
   it('returns null for invalid input', () => {
-    expect(normalizeGuardrailDescriptor(null)).toBeNull();
-    expect(normalizeGuardrailDescriptor(123)).toBeNull();
+    expect(normalizeDescriptor(null)).toBeNull();
+    expect(normalizeDescriptor(123)).toBeNull();
   });
 });

@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { SystemPromptLeakGuardrail } from '@/lib/guardrails/input/system-prompt-leak.guardrail';
+import { SystemPromptLeakGuardrail } from '@/modules/guardrails/guards/input/system-prompt-leak.guardrail';
 
 describe('SystemPromptLeakGuardrail', () => {
   it('allows normal user input', () => {

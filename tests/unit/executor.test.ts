@@ -1,8 +1,8 @@
 // tests/unit/executor.test.ts
 import { describe, it, expect } from 'vitest';
-import { executeGuardrails } from '@/lib/guardrails/core/executor';
-import { BaseGuardrail } from '@/lib/guardrails/core/base';
-import type { GuardrailContext } from '@/lib/guardrails/core/context';
+import { executeGuardrails } from '@/modules/guardrails/engine/executor';
+import { BaseGuardrail } from '@/modules/guardrails/engine/base.guardrails';
+import type { GuardrailContext } from '@/modules/guardrails/engine/context';
 
 class AllowGuardrail extends BaseGuardrail {
   constructor() {

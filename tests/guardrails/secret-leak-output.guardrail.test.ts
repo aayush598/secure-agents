@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { SecretLeakOutputGuardrail } from '@/lib/guardrails/output/secret-leak-output.guardrail';
+import { SecretLeakOutputGuardrail } from '@/modules/guardrails/guards/output/secret-leak-output.guardrail';
 
 describe('SecretLeakOutputGuardrail', () => {
   it('allows safe output', () => {

@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { DefamationGuardrail } from '@/lib/guardrails/content/defamation.guardrail';
+import { DefamationGuardrail } from '@/modules/guardrails/guards/content/defamation.guardrail';
 
 describe('DefamationGuardrail', () => {
   it('allows neutral statements', () => {

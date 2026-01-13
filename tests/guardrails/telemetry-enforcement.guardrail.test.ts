@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { TelemetryEnforcementGuardrail } from '@/lib/guardrails/operational/telemetry-enforcement.guardrail';
+import { TelemetryEnforcementGuardrail } from '@/modules/guardrails/guards/operational/telemetry-enforcement.guardrail';
 
 describe('TelemetryEnforcementGuardrail', () => {
   it('allows when telemetry is enabled', () => {

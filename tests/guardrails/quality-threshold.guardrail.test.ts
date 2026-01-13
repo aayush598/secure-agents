@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { QualityThresholdGuardrail } from '@/lib/guardrails/output/quality-threshold.guardrail';
+import { QualityThresholdGuardrail } from '@/modules/guardrails/guards/output/quality-threshold.guardrail';
 
 describe('QualityThresholdGuardrail', () => {
   it('allows high-quality output', () => {

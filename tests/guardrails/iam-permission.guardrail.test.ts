@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { IAMPermissionGuardrail } from '@/lib/guardrails/tool/iam-permission.guardrail';
+import { IAMPermissionGuardrail } from '@/modules/guardrails/guards/tool/iam-permission.guardrail';
 import { createIAMToolContext } from '../fixtures/iam-context';
 
 describe('IAMPermissionGuardrail', () => {

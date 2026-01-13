@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { UserConsentValidationGuardrail } from '@/lib/guardrails/input/user-consent.guardrail';
+import { UserConsentValidationGuardrail } from '@/modules/guardrails/guards/input/user-consent.guardrail';
 
 describe('UserConsentValidationGuardrail', () => {
   it('blocks when consent is missing', () => {

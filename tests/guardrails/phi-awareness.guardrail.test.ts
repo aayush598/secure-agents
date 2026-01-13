@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { PHIAwarenessGuardrail } from '@/lib/guardrails/input/phi-awareness.guardrail';
+import { PHIAwarenessGuardrail } from '@/modules/guardrails/guards/input/phi-awareness.guardrail';
 
 describe('PHIAwarenessGuardrail', () => {
   it('allows general medical discussion', () => {

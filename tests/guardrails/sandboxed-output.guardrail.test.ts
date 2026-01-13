@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { SandboxedOutputGuardrail } from '@/lib/guardrails/output/sandboxed-output.guardrail';
+import { SandboxedOutputGuardrail } from '@/modules/guardrails/guards/output/sandboxed-output.guardrail';
 
 describe('SandboxedOutputGuardrail', () => {
   it('allows normal explanatory text', () => {

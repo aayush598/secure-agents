@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { PromptInjectionSignatureGuardrail } from '@/lib/guardrails/input/prompt-injection.guardrail';
+import { PromptInjectionSignatureGuardrail } from '@/modules/guardrails/guards/input/prompt-injection.guardrail';
 
 describe('PromptInjectionSignatureGuardrail', () => {
   it('allows benign input', () => {

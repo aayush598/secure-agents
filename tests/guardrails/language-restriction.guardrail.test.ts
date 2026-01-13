@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { LanguageRestrictionGuardrail } from '@/lib/guardrails/input/language-restriction.guardrail';
+import { LanguageRestrictionGuardrail } from '@/modules/guardrails/guards/input/language-restriction.guardrail';
 
 describe('LanguageRestrictionGuardrail', () => {
   it('allows pure English text', () => {

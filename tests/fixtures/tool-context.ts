@@ -6,7 +6,7 @@ import {
   ToolAction,
   type CapabilityToken,
   type AgentIdentity,
-} from '@/lib/guardrails/tool/tool-access.guardrail';
+} from '@/modules/guardrails/guards/tool/tool-access.guardrail';
 
 export function createAgentIdentity(overrides: Partial<AgentIdentity> = {}): AgentIdentity {
   return {

@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { BinaryAttachmentGuardrail } from '@/lib/guardrails/input/binary-attachment.guardrail';
+import { BinaryAttachmentGuardrail } from '@/modules/guardrails/guards/input/binary-attachment.guardrail';
 
 describe('BinaryAttachmentGuardrail', () => {
   it('allows normal text input', () => {

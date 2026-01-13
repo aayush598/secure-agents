@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { DestructiveToolCallGuardrail } from '@/lib/guardrails/tool/destructive-tool-call.guardrail';
+import { DestructiveToolCallGuardrail } from '@/modules/guardrails/guards/tool/destructive-tool-call.guardrail';
 import { createToolAccessContext } from '../fixtures/tool-context';
 
 describe('DestructiveToolCallGuardrail', () => {

@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { SelfHarmGuardrail } from '@/lib/guardrails/input/self-harm.guardrail';
+import { SelfHarmGuardrail } from '@/modules/guardrails/guards/input/self-harm.guardrail';
 
 describe('SelfHarmGuardrail', () => {
   it('allows safe content', () => {

@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach } from 'vitest';
-import { RateLimitGuardrail } from '@/lib/guardrails/operational/rate-limit.guardrail';
+import { RateLimitGuardrail } from '@/modules/guardrails/guards/operational/rate-limit.guardrail';
 
 describe('RateLimitGuardrail', () => {
   beforeEach(() => {

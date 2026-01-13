@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { DangerousPatternsGuardrail } from '@/lib/guardrails/input/dangerous-patterns.guardrail';
+import { DangerousPatternsGuardrail } from '@/modules/guardrails/guards/input/dangerous-patterns.guardrail';
 
 describe('DangerousPatternsGuardrail', () => {
   it('allows safe input', () => {

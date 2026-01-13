@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { JailbreakPatternGuardrail } from '@/lib/guardrails/input/jailbreak-pattern.guardrail';
+import { JailbreakPatternGuardrail } from '@/modules/guardrails/guards/input/jailbreak-pattern.guardrail';
 
 describe('JailbreakPatternGuardrail', () => {
   it('allows safe input', () => {

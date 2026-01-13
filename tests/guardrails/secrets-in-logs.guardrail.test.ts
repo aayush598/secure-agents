@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { SecretsInLogsGuardrail } from '@/lib/guardrails/output/secrets-in-logs.guardrail';
+import { SecretsInLogsGuardrail } from '@/modules/guardrails/guards/output/secrets-in-logs.guardrail';
 
 describe('SecretsInLogsGuardrail', () => {
   it('allows logs without secrets', () => {

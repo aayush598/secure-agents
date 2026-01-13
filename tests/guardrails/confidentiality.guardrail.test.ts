@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { ConfidentialityGuardrail } from '@/lib/guardrails/output/confidentiality.guardrail';
+import { ConfidentialityGuardrail } from '@/modules/guardrails/guards/output/confidentiality.guardrail';
 
 describe('ConfidentialityGuardrail', () => {
   it('allows clean output', () => {

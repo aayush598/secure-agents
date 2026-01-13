@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { InternalEndpointLeakGuardrail } from '@/lib/guardrails/output/internal-endpoint.guardrail';
+import { InternalEndpointLeakGuardrail } from '@/modules/guardrails/guards/output/internal-endpoint.guardrail';
 
 describe('InternalEndpointLeakGuardrail', () => {
   it('allows safe public URLs', () => {

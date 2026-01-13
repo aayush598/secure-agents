@@ -21,7 +21,7 @@ const store = new Map<string, RateLimitEntry>();
 export interface RateLimitGuardrailConfig {
   limit: number;
   windowMs: number;
-  warnThreshold: number;
+  warnThreshold?: number;
 }
 
 /* ============================================================================
@@ -31,7 +31,7 @@ export interface RateLimitGuardrailConfig {
 const DEFAULT_CONFIG: RateLimitGuardrailConfig = {
   limit: 100,
   windowMs: 60_000,
-  warnThreshold: 10,
+  warnThreshold: undefined,
 };
 
 /* ============================================================================
@@ -77,7 +77,7 @@ export class RateLimitGuardrail extends BaseGuardrail<RateLimitGuardrailConfig> 
 
     const remaining = this.config.limit - entry.count;
 
-    if (remaining <= this.config.warnThreshold) {
+    if (typeof this.config.warnThreshold === 'number' && remaining <= this.config.warnThreshold) {
       return this.result({
         passed: true,
         action: 'WARN',
@@ -124,7 +124,7 @@ export class RateLimitGuardrail extends BaseGuardrail<RateLimitGuardrailConfig> 
       warnThreshold:
         typeof cfg.warnThreshold === 'number' && cfg.warnThreshold >= 0
           ? cfg.warnThreshold
-          : DEFAULT_CONFIG.warnThreshold,
+          : undefined,
     };
   }
 

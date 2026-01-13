@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { RegexFilterGuardrail } from '@/lib/guardrails/input/regex-filter.guardrail';
+import { RegexFilterGuardrail } from '@/modules/guardrails/guards/input/regex-filter.guardrail';
 
 describe('RegexFilterGuardrail', () => {
   it('allows input when no rules match', () => {

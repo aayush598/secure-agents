@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { ApiKeyRotationTriggerGuardrail } from '@/lib/guardrails/security/api-key-rotation.guardrail';
+import { ApiKeyRotationTriggerGuardrail } from '@/modules/guardrails/guards/security/api-key-rotation.guardrail';
 
 describe('ApiKeyRotationTriggerGuardrail', () => {
   it('allows when no security signals are present', () => {

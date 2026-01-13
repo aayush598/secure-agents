@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { ViolenceGuardrail } from '@/lib/guardrails/content/violence.guardrail';
+import { ViolenceGuardrail } from '@/modules/guardrails/guards/content/violence.guardrail';
 
 describe('ViolenceGuardrail', () => {
   it('allows safe content', () => {

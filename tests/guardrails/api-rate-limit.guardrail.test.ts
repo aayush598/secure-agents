@@ -2,7 +2,7 @@ import { describe, it, expect, beforeEach } from 'vitest';
 import {
   ApiRateLimitGuardrail,
   __resetRateLimitBuckets,
-} from '@/lib/guardrails/tool/api-rate-limit.guardrail';
+} from '@/modules/guardrails/guards/tool/api-rate-limit.guardrail';
 
 describe('ApiRateLimitGuardrail', () => {
   beforeEach(() => {

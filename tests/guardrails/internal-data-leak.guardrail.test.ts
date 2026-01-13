@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { InternalDataLeakGuardrail } from '@/lib/guardrails/output/internal-data-leak.guardrail';
+import { InternalDataLeakGuardrail } from '@/modules/guardrails/guards/output/internal-data-leak.guardrail';
 
 describe('InternalDataLeakGuardrail', () => {
   it('allows clean output', () => {

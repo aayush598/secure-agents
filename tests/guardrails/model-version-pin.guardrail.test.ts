@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { ModelVersionPinGuardrail } from '@/lib/guardrails/operational/model-version-pin.guardrail';
+import { ModelVersionPinGuardrail } from '@/modules/guardrails/guards/operational/model-version-pin.guardrail';
 
 describe('ModelVersionPinGuardrail', () => {
   const config = {

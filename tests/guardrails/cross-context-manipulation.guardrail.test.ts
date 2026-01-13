@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { CrossContextManipulationGuardrail } from '@/lib/guardrails/input/cross-context-manipulation.guardrail';
+import { CrossContextManipulationGuardrail } from '@/modules/guardrails/guards/input/cross-context-manipulation.guardrail';
 
 describe('CrossContextManipulationGuardrail', () => {
   it('allows normal input', () => {

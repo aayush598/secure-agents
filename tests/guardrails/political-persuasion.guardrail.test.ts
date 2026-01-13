@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { PoliticalPersuasionGuardrail } from '@/lib/guardrails/input/political-persuasion.guardrail';
+import { PoliticalPersuasionGuardrail } from '@/modules/guardrails/guards/input/political-persuasion.guardrail';
 
 describe('PoliticalPersuasionGuardrail', () => {
   it('allows informational political content', () => {

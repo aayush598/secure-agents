@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { RightToErasureGuardrail } from '@/lib/guardrails/input/right-to-erasure.guardrail';
+import { RightToErasureGuardrail } from '@/modules/guardrails/guards/input/right-to-erasure.guardrail';
 
 describe('RightToErasureGuardrail', () => {
   it('allows normal input', () => {

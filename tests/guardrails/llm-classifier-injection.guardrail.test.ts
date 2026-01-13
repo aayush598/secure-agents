@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { LLMClassifierInjectionGuardrail } from '@/lib/guardrails/input/llm-classifier-injection.guardrail';
+import { LLMClassifierInjectionGuardrail } from '@/modules/guardrails/guards/input/llm-classifier-injection.guardrail';
 
 describe('LLMClassifierInjectionGuardrail', () => {
   it('allows benign input', () => {

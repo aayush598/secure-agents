@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { RoleplayInjectionGuardrail } from '@/lib/guardrails/input/roleplay-injection.guardrail';
+import { RoleplayInjectionGuardrail } from '@/modules/guardrails/guards/input/roleplay-injection.guardrail';
 
 describe('RoleplayInjectionGuardrail', () => {
   it('allows normal input', () => {

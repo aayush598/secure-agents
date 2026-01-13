@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { OverrideInstructionGuardrail } from '@/lib/guardrails/input/override-instruction.guardrail';
+import { OverrideInstructionGuardrail } from '@/modules/guardrails/guards/input/override-instruction.guardrail';
 
 describe('OverrideInstructionGuardrail', () => {
   it('allows normal user input', () => {
