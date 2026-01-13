@@ -23,9 +23,6 @@ module.exports = {
   /* Markdown */
   proseWrap: 'preserve',
 
-  /* JSON */
-  jsonRecursiveSort: false,
-
   /* TailwindCSS class sorting (IMPORTANT) */
   plugins: ['prettier-plugin-tailwindcss'],
 
