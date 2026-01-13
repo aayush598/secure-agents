@@ -1,66 +1,13 @@
 'use client';
 
-import { useUser } from '@clerk/nextjs';
 import { useRouter } from 'next/navigation';
-import {
-  Shield,
-  Lock,
-  Zap,
-  CheckCircle,
-  ArrowRight,
-  Code,
-  Key,
-  BarChart3,
-  Menu,
-  X,
-  Github,
-  Twitter,
-  Linkedin,
-  Sparkles,
-  Globe,
-  Users,
-  TrendingUp,
-  Star,
-  ChevronRight,
-} from 'lucide-react';
-import { ShieldCheck, Building2, Baby, HeartPulse, Landmark, Wrench } from 'lucide-react';
+import { Shield, CheckCircle, Github, Twitter, Linkedin, TrendingUp } from 'lucide-react';
 import { Button } from '@/shared/ui/button';
 import { Card, CardContent } from '@/shared/ui/card';
-import { useState, useEffect } from 'react';
-import { UserButton } from '@clerk/nextjs';
+import Image from 'next/image';
 
 export default function LandingPage() {
-  const { isSignedIn } = useUser();
   const router = useRouter();
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  const navItems = [
-    { label: 'Features', href: '#features' },
-    { label: 'Profiles', href: '#profiles' },
-    { label: 'How It Works', href: '#how-it-works' },
-    { label: 'Pricing', href: '#pricing' },
-    { label: 'Docs', href: '/docs' },
-    { label: 'Hub', href: '/hub' },
-  ];
-
-  const scrollToSection = (href: string) => {
-    if (href.startsWith('#')) {
-      const element = document.querySelector(href);
-      element?.scrollIntoView({ behavior: 'smooth' });
-      setMobileMenuOpen(false);
-    } else {
-      router.push(href);
-    }
-  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
@@ -81,10 +28,13 @@ export default function LandingPage() {
 
       <div className="relative bg-gray-50">
         <div className="absolute bottom-0 right-0 overflow-hidden lg:inset-y-0">
-          <img
+          <Image
             className="h-full w-auto"
             src="https://d33wubrfki0l68.cloudfront.net/1e0fc04f38f5896d10ff66824a62e466839567f8/699b5/images/hero/3/background-pattern.png"
             alt=""
+            width={800}
+            height={600}
+            priority
           />
         </div>
       </div>

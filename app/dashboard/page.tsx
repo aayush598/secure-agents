@@ -1,7 +1,6 @@
 import { UserButton } from '@clerk/nextjs';
 import Link from 'next/link';
 import {
-  Shield,
   Key,
   FileCode,
   Activity,
@@ -11,15 +10,35 @@ import {
   XCircle,
   Clock,
   Zap,
-  ArrowUpRight,
   BarChart3,
   ArrowRight,
 } from 'lucide-react';
+import type { ReactNode } from 'react';
 
 import { Badge } from '@/shared/ui/badge';
 import { Button } from '@/shared/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/shared/ui/card';
 import { getDashboardStats } from './stats';
+
+interface StatCardProps {
+  title: string;
+  value: string | number;
+  icon: ReactNode;
+  iconBg: string;
+  iconColor: string;
+}
+
+interface ProgressBarProps {
+  label: string;
+  current: number;
+  max: number;
+}
+
+interface QuickLinkProps {
+  href: string;
+  label: string;
+  icon: React.ReactNode;
+}
 
 export default async function DashboardPage() {
   const stats = await getDashboardStats();
@@ -46,7 +65,6 @@ export default async function DashboardPage() {
             title="Total Executions"
             value={stats.totalExecutions.toLocaleString()}
             icon={<Activity className="h-5 w-5" />}
-            gradient="from-blue-500 to-blue-600"
             iconBg="bg-blue-100"
             iconColor="text-blue-600"
           />
@@ -54,7 +72,6 @@ export default async function DashboardPage() {
             title="Last 24 Hours"
             value={stats.last24Hours.toLocaleString()}
             icon={<TrendingUp className="h-5 w-5" />}
-            gradient="from-purple-500 to-purple-600"
             iconBg="bg-purple-100"
             iconColor="text-purple-600"
           />
@@ -62,7 +79,6 @@ export default async function DashboardPage() {
             title="Success Rate"
             value={`${successRate}%`}
             icon={<CheckCircle2 className="h-5 w-5" />}
-            gradient="from-green-500 to-green-600"
             iconBg="bg-green-100"
             iconColor="text-green-600"
           />
@@ -70,7 +86,6 @@ export default async function DashboardPage() {
             title="Avg Response Time"
             value={`${stats.avgExecutionTime}ms`}
             icon={<Zap className="h-5 w-5" />}
-            gradient="from-yellow-500 to-yellow-600"
             iconBg="bg-yellow-100"
             iconColor="text-yellow-600"
           />
@@ -94,13 +109,11 @@ export default async function DashboardPage() {
                 label="Requests per Minute"
                 current={stats.rateLimits.perMinute.current}
                 max={stats.rateLimits.perMinute.max}
-                color="slate"
               />
               <ProgressBar
                 label="Requests per Day"
                 current={stats.rateLimits.perDay.current}
                 max={stats.rateLimits.perDay.max}
-                color="slate"
               />
             </CardContent>
           </Card>
@@ -225,7 +238,7 @@ export default async function DashboardPage() {
   );
 }
 
-function StatCard({ title, value, icon, gradient, iconBg, iconColor }: any) {
+function StatCard({ title, value, icon, iconBg, iconColor }: StatCardProps) {
   return (
     <Card className="group border-slate-200 bg-white transition-all duration-300 hover:shadow-lg">
       <CardContent className="pt-6">
@@ -243,7 +256,7 @@ function StatCard({ title, value, icon, gradient, iconBg, iconColor }: any) {
   );
 }
 
-function ProgressBar({ label, current, max, color = 'slate' }: any) {
+function ProgressBar({ label, current, max }: ProgressBarProps) {
   const pct = Math.min((current / max) * 100, 100);
   const isNearLimit = pct >= 80;
 
@@ -272,7 +285,7 @@ function ProgressBar({ label, current, max, color = 'slate' }: any) {
   );
 }
 
-function QuickLink({ href, label, icon }: any) {
+function QuickLink({ href, label, icon }: QuickLinkProps) {
   return (
     <Button
       asChild

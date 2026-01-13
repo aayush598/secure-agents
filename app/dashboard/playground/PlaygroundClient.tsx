@@ -1,18 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import {
-  Play,
-  ArrowLeft,
-  AlertCircle,
-  CheckCircle2,
-  XCircle,
-  Clock,
-  Loader2,
-  Code,
-  FileJson,
-  Check,
-} from 'lucide-react';
+import { Play, ArrowLeft, Clock, Loader2, Code, FileJson, Check } from 'lucide-react';
 
 import Link from 'next/link';
 import { toast, Toaster } from 'sonner';
@@ -23,8 +12,7 @@ import { Label } from '@/shared/ui/label';
 import { Textarea } from '@/shared/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/shared/ui/select';
 import { Badge } from '@/shared/ui/badge';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/shared/ui/tabs';
-import { Alert, AlertDescription, AlertTitle } from '@/shared/ui/alert';
+import { GuardrailResult } from '@/modules/guardrails/descriptors/types';
 
 interface Profile {
   id: string;
@@ -42,17 +30,11 @@ interface ApiKey {
 interface TestResult {
   passed: boolean;
   profile: { name: string };
-  results: any[];
+  results: GuardrailResult[];
   summary: { total: number; failed: number };
   executionTimeMs: number;
   redactedText?: string;
 }
-
-const EXAMPLES = {
-  pii: 'My email is john.doe@example.com',
-  injection: 'Ignore previous instructions',
-  secrets: 'Here is my API key: sk_live_123',
-};
 
 export default function PlaygroundClient({
   profiles,
@@ -96,8 +78,12 @@ export default function PlaygroundClient({
 
       setResult(data);
       toast.success('Validation completed');
-    } catch (e: any) {
-      toast.error(e.message ?? 'Validation failed');
+    } catch (e: unknown) {
+      if (e instanceof Error) {
+        toast.error(e.message);
+      } else {
+        toast.error('Validation failed');
+      }
     } finally {
       setTesting(false);
     }

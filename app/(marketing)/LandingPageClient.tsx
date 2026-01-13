@@ -1,6 +1,5 @@
 'use client';
 
-import { useUser } from '@clerk/nextjs';
 import { useRouter } from 'next/navigation';
 import {
   Shield,
@@ -24,20 +23,10 @@ import {
 import { ShieldCheck, Building2, Baby, HeartPulse, Landmark, Wrench } from 'lucide-react';
 import { Button } from '@/shared/ui/button';
 import { Card, CardContent } from '@/shared/ui/card';
-import { useState, useEffect } from 'react';
+import Image from 'next/image';
 
 export default function LandingPageClient() {
-  const { isSignedIn } = useUser();
   const router = useRouter();
-
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   const scrollToSection = (href: string) => {
     if (href.startsWith('#')) {
@@ -47,7 +36,6 @@ export default function LandingPageClient() {
     }
   };
 
-  /* 🔽 PASTE YOUR ENTIRE EXISTING JSX RETURN HERE 🔽 */
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
       {/* Decorative Elements */}
@@ -67,10 +55,13 @@ export default function LandingPageClient() {
 
       <div className="relative bg-gray-50">
         <div className="absolute bottom-0 right-0 overflow-hidden lg:inset-y-0">
-          <img
+          <Image
             className="h-full w-auto"
             src="https://d33wubrfki0l68.cloudfront.net/1e0fc04f38f5896d10ff66824a62e466839567f8/699b5/images/hero/3/background-pattern.png"
             alt=""
+            width={800}
+            height={600}
+            priority
           />
         </div>
 
