@@ -1,4 +1,7 @@
-export const PROFILES = [
+import { HubProfile } from '../domain/hub-profile';
+import { HubItem } from '../domain/hub-item';
+
+export const PROFILES: HubProfile[] = [
   /* =========================================================================
    * GENERAL PURPOSE
    * ========================================================================= */
@@ -76,7 +79,7 @@ export const PROFILES = [
       'rate-limit',
       'cost-threshold',
     ],
-    tags: ['security', 'operations'],
+    tags: ['security'],
     stage: 'completed',
     icon: 'grid',
     stats: { views: 1450, likes: 320, shares: 89 },
@@ -185,7 +188,7 @@ export const PROFILES = [
     name: 'Developer Playground',
     description: 'Relaxed guardrails for experimentation and testing.',
     guardrails: ['input-size', 'rate-limit', 'telemetry-enforcement'],
-    tags: ['operations'],
+    tags: ['input'],
     stage: 'completed',
     icon: 'code',
     stats: { views: 1320, likes: 301, shares: 88 },
@@ -201,7 +204,7 @@ export const PROFILES = [
     name: 'Cost Optimized',
     description: 'Aggressive cost and rate controls for high-volume workloads.',
     guardrails: ['rate-limit', 'cost-threshold', 'model-version-pin', 'quality-threshold'],
-    tags: ['cost', 'operations'],
+    tags: ['finance'],
     stage: 'completed',
     icon: 'trending-down',
     stats: { views: 960, likes: 188, shares: 52 },
@@ -224,3 +227,21 @@ export const PROFILES = [
     stats: { views: 740, likes: 141, shares: 39 },
   },
 ];
+
+/**
+ * Hub catalog normalized to HubItem
+ * UI consumes only HubItem
+ */
+export const profileCatalog: HubItem[] = PROFILES.map(
+  (p): HubItem => ({
+    id: p.id,
+    slug: p.slug,
+    type: 'profile',
+    name: p.name,
+    description: p.description,
+    tags: p.tags,
+    stage: p.stage,
+    icon: p.icon,
+    stats: p.stats,
+  }),
+);

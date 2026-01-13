@@ -1,4 +1,4 @@
-import { GUARDRAILS } from '@/lib/hub/guardrails';
+import { GUARDRAILS } from '@/modules/hub/data';
 import { ArrowLeft, Eye, Heart, Share2, Tag, Shield, Clock, TrendingUp } from 'lucide-react';
 import Link from 'next/link';
 import { Button } from '@/shared/ui/button';

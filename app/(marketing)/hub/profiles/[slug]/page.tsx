@@ -1,7 +1,6 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { PROFILES } from '@/lib/hub/profiles';
-import { GUARDRAILS } from '@/lib/hub/guardrails';
+import { PROFILES, guardrailCatalog } from '@/modules/hub/data';
 import { Eye, Heart, Share2, Shield, ArrowLeft, CheckCircle, Package, Tag } from 'lucide-react';
 import { Button } from '@/shared/ui/button';
 import { Badge } from '@/shared/ui/badge';
@@ -15,7 +14,7 @@ export default function ProfileDetailPage({ params }: { params: { slug: string }
   }
 
   const guardrails = profile.guardrails
-    .map((id) => GUARDRAILS.find((g) => g.id === id))
+    .map((id) => guardrailCatalog.find((g) => g.id === id))
     .filter(Boolean);
 
   return (
