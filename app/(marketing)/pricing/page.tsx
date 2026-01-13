@@ -30,7 +30,7 @@ export default function LandingPage() {
         <div className="absolute bottom-0 right-0 overflow-hidden lg:inset-y-0">
           <Image
             className="h-full w-auto"
-            src="https://d33wubrfki0l68.cloudfront.net/1e0fc04f38f5896d10ff66824a62e466839567f8/699b5/images/hero/3/background-pattern.png"
+            src="/images/HeroSection.png"
             alt=""
             width={800}
             height={600}
