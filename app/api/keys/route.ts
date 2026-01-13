@@ -3,11 +3,21 @@ import { requireAuth } from '@/shared/auth';
 import { db } from '@/shared/db/client';
 import { apiKeys } from '@/shared/db/schema';
 import { eq, desc } from 'drizzle-orm';
-import { generateApiKey } from '@/lib/utils/api-key';
+import { generateApiKey } from '@/lib/api-key';
+
+function getErrorMessage(error: unknown): string {
+  if (error instanceof Error) {
+    return error.message;
+  }
+  return 'Unknown error';
+}
+
+function isUnauthorized(error: unknown): boolean {
+  return error instanceof Error && error.name === 'UnauthorizedError';
+}
 
 export async function GET() {
   try {
-    // ✅ Centralized auth + DB user ensured
     const { dbUser } = await requireAuth();
 
     const allKeys = await db
@@ -17,13 +27,16 @@ export async function GET() {
       .orderBy(desc(apiKeys.createdAt));
 
     return NextResponse.json({ apiKeys: allKeys });
-  } catch (error: any) {
-    if (error?.name === 'UnauthorizedError') {
+  } catch (error: unknown) {
+    if (isUnauthorized(error)) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
     return NextResponse.json(
-      { error: 'Failed to fetch API keys', details: error.message },
+      {
+        error: 'Failed to fetch API keys',
+        details: getErrorMessage(error),
+      },
       { status: 500 },
     );
   }
@@ -31,7 +44,6 @@ export async function GET() {
 
 export async function POST(request: NextRequest) {
   try {
-    // ✅ Centralized auth + DB user ensured
     const { dbUser } = await requireAuth();
 
     const body = await request.json();
@@ -56,13 +68,16 @@ export async function POST(request: NextRequest) {
       .returning();
 
     return NextResponse.json({ apiKey: newKey });
-  } catch (error: any) {
-    if (error?.name === 'UnauthorizedError') {
+  } catch (error: unknown) {
+    if (isUnauthorized(error)) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
     return NextResponse.json(
-      { error: 'Failed to create API key', details: error.message },
+      {
+        error: 'Failed to create API key',
+        details: getErrorMessage(error),
+      },
       { status: 500 },
     );
   }

@@ -46,8 +46,6 @@ function buildDocsSearchIndex() {
 
   fs.mkdirSync(path.dirname(OUTPUT), { recursive: true });
   fs.writeFileSync(OUTPUT, JSON.stringify(miniSearch.toJSON()));
-
-  console.log(`✅ Docs search index built (${documents.length} pages)`);
 }
 
 buildDocsSearchIndex();
