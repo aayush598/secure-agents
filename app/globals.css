@@ -134,3 +134,56 @@ code {
     @apply bg-background text-foreground;
   }
 }
+
+/* =========================================
+   Shiki syntax highlighting (CRITICAL)
+========================================= */
+
+/* Code block container */
+.prose pre {
+  @apply overflow-x-auto rounded-lg border bg-muted p-4 text-sm;
+}
+
+/* Inline code */
+.prose :not(pre) > code {
+  @apply rounded bg-muted px-1 py-0.5 text-sm;
+}
+
+/* Reset inner code */
+.prose pre code {
+  @apply bg-transparent p-0 text-sm;
+}
+
+/* Shiki tokens — THIS IS THE FIX */
+.prose code span {
+  color: var(--shiki-light);
+}
+
+/* Dark mode support */
+.dark .prose code span {
+  color: var(--shiki-dark);
+}
+
+/* Line highlighting */
+.prose .line--highlighted {
+  @apply bg-muted/60;
+}
+
+/* Word highlighting */
+.prose .word--highlighted {
+  @apply rounded bg-primary/20 px-1;
+}
+
+/* =========================================
+   Shiki fallback for plain-text blocks
+========================================= */
+
+/* When no Shiki variables exist, fall back to readable text */
+.prose pre code span:not([style*='--shiki']) {
+  color: hsl(var(--foreground));
+}
+
+/* Dark mode fallback */
+.dark .prose pre code span:not([style*='--shiki']) {
+  color: hsl(var(--foreground));
+}

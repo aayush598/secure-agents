@@ -6,6 +6,9 @@ import { ReactNode } from 'react';
 import { Callout } from '../_components/Callout';
 import { DocsCodeBlock } from '../_components/DocsCodeBlock';
 
+import rehypePrettyCode from 'rehype-pretty-code';
+import { rehypePrettyCodeOptions } from './rehype-pretty-code';
+
 const CONTENT_ROOT = path.join(process.cwd(), 'app/docs/_content');
 
 /**
@@ -26,7 +29,12 @@ export async function loadDoc(slug: string): Promise<ReactNode | null> {
     const { content } = await compileMDX({
       source,
       components: mdxComponents,
-      options: { parseFrontmatter: true },
+      options: {
+        parseFrontmatter: true,
+        mdxOptions: {
+          rehypePlugins: [[rehypePrettyCode, rehypePrettyCodeOptions]],
+        },
+      },
     });
 
     return content;
