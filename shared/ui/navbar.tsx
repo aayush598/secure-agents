@@ -6,7 +6,7 @@ import { Shield, Menu, X, ArrowRight } from 'lucide-react';
 import { Button } from '@/shared/ui/button';
 import { useEffect, useState } from 'react';
 
-export function MarketingNavbar() {
+export function Navbar() {
   const router = useRouter();
   const { isSignedIn } = useUser();
 
