@@ -30,10 +30,13 @@ export default async function PlaygroundPage() {
       .where(eq(apiKeys.userId, dbUser.id)),
   ]);
 
-  const profilesData = rawProfiles.map((p) => ({
-    ...p,
-    description: p.description ?? '',
-  }));
-
-  return <PlaygroundClient profiles={profilesData} apiKeys={apiKeysData} />;
+  return (
+    <PlaygroundClient
+      profiles={rawProfiles.map((p) => ({
+        ...p,
+        description: p.description ?? '',
+      }))}
+      apiKeys={apiKeysData}
+    />
+  );
 }

@@ -1,18 +1,17 @@
 'use client';
 
 import { useState } from 'react';
-import { Play, ArrowLeft, Clock, Loader2, Code, FileJson, Check } from 'lucide-react';
-
-import Link from 'next/link';
+import { Play, Loader2, FileJson, Check, AlertTriangle, CheckCircle } from 'lucide-react';
 import { toast, Toaster } from 'sonner';
 
+import { validateText } from './playground.service';
 import { Button } from '@/shared/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/shared/ui/card';
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/shared/ui/card';
 import { Label } from '@/shared/ui/label';
 import { Textarea } from '@/shared/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/shared/ui/select';
 import { Badge } from '@/shared/ui/badge';
-import { GuardrailResult } from '@/modules/guardrails/descriptors/types';
+import type { ValidateResponse } from '@/modules/guardrails/contracts/validate';
 
 interface Profile {
   id: string;
@@ -27,14 +26,7 @@ interface ApiKey {
   isActive: boolean;
 }
 
-interface TestResult {
-  passed: boolean;
-  profile: { name: string };
-  results: GuardrailResult[];
-  summary: { total: number; failed: number };
-  executionTimeMs: number;
-  redactedText?: string;
-}
+type ValidationType = 'input' | 'output' | 'both';
 
 export default function PlaygroundClient({
   profiles,
@@ -46,8 +38,9 @@ export default function PlaygroundClient({
   const [text, setText] = useState('');
   const [profileName, setProfileName] = useState('default');
   const [apiKey, setApiKey] = useState(apiKeys.find((k) => k.isActive)?.key ?? '');
+  const [validationType, setValidationType] = useState<ValidationType>('input');
   const [testing, setTesting] = useState(false);
-  const [result, setResult] = useState<TestResult | null>(null);
+  const [result, setResult] = useState<ValidateResponse | null>(null);
   const [copied, setCopied] = useState(false);
 
   const runTest = async () => {
@@ -60,30 +53,11 @@ export default function PlaygroundClient({
     setResult(null);
 
     try {
-      const res = await fetch('/api/validate', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'x-api-key': apiKey,
-        },
-        body: JSON.stringify({
-          text,
-          profileName,
-          validationType: 'input',
-        }),
-      });
-
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error);
-
-      setResult(data);
+      const res = await validateText({ text, profileName, validationType }, apiKey);
+      setResult(res);
       toast.success('Validation completed');
-    } catch (e: unknown) {
-      if (e instanceof Error) {
-        toast.error(e.message);
-      } else {
-        toast.error('Validation failed');
-      }
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : 'Validation failed');
     } finally {
       setTesting(false);
     }
@@ -96,38 +70,44 @@ export default function PlaygroundClient({
     setTimeout(() => setCopied(false), 1500);
   };
 
+  const failed = result?.results.filter((r) => !r.passed) ?? [];
+  const passed = result?.results.filter((r) => r.passed) ?? [];
+
   return (
     <div className="container mx-auto px-4 py-8">
       <Toaster />
-
-      <Link href="/dashboard">
-        <Button variant="ghost" size="sm" className="mb-6">
-          <ArrowLeft className="mr-2 h-4 w-4" />
-          Back to Dashboard
-        </Button>
-      </Link>
-
-      <h1 className="mb-2 text-3xl font-bold">Test Playground</h1>
-      <p className="mb-8 text-slate-600">Validate inputs against your guardrail profiles</p>
+      <h1 className="mb-6 text-3xl font-bold">Playground</h1>
 
       <div className="grid gap-6 lg:grid-cols-2">
-        {/* INPUT */}
+        {/* CONFIGURATION */}
         <Card>
           <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Code className="h-5 w-5" />
-              Input
-            </CardTitle>
-            <CardDescription>Configure and run validation</CardDescription>
+            <CardTitle>Validation Configuration</CardTitle>
+            <CardDescription>Configure profile, validation scope, and input text</CardDescription>
           </CardHeader>
+
           <CardContent className="space-y-4">
+            <Label>Validation Type</Label>
+            <Select
+              value={validationType}
+              onValueChange={(v) => setValidationType(v as ValidationType)}
+            >
+              <SelectTrigger>
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="input">Input only</SelectItem>
+                <SelectItem value="output">Output only</SelectItem>
+                <SelectItem value="both">Input + Output</SelectItem>
+              </SelectContent>
+            </Select>
+
             <Label>Profile</Label>
             <Select value={profileName} onValueChange={setProfileName}>
               <SelectTrigger>
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="default">Default</SelectItem>
                 {profiles.map((p) => (
                   <SelectItem key={p.id} value={p.name}>
                     {p.name}
@@ -150,7 +130,14 @@ export default function PlaygroundClient({
               </SelectContent>
             </Select>
 
-            <Label>Text</Label>
+            <Label>
+              {validationType === 'output'
+                ? 'Output text'
+                : validationType === 'both'
+                  ? 'Input / Output text'
+                  : 'Input text'}
+            </Label>
+
             <Textarea
               rows={6}
               value={text}
@@ -162,12 +149,12 @@ export default function PlaygroundClient({
               {testing ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  Running…
+                  Running
                 </>
               ) : (
                 <>
                   <Play className="mr-2 h-4 w-4" />
-                  Run
+                  Run Validation
                 </>
               )}
             </Button>
@@ -177,23 +164,99 @@ export default function PlaygroundClient({
         {/* RESULTS */}
         <Card>
           <CardHeader>
-            <CardTitle>Results</CardTitle>
+            <CardTitle>Validation Results</CardTitle>
+            <CardDescription>Guardrail execution details and outcomes</CardDescription>
           </CardHeader>
-          <CardContent>
+
+          <CardContent className="space-y-4">
             {!result ? (
               <p className="text-sm text-slate-500">No results yet</p>
             ) : (
               <>
-                <Badge variant={result.passed ? 'default' : 'destructive'}>
-                  {result.passed ? 'PASSED' : 'FAILED'}
-                </Badge>
+                {/* SUMMARY */}
+                <div className="flex items-center justify-between">
+                  <Badge variant={result.passed ? 'default' : 'destructive'}>
+                    {result.passed ? (
+                      <>
+                        <CheckCircle className="mr-1 h-3 w-3" />
+                        PASSED
+                      </>
+                    ) : (
+                      <>
+                        <AlertTriangle className="mr-1 h-3 w-3" />
+                        FAILED
+                      </>
+                    )}
+                  </Badge>
 
-                <div className="mt-4 text-sm">
-                  <Clock className="mr-1 inline h-4 w-4" />
-                  {result.executionTimeMs} ms
+                  <span className="text-xs text-slate-500">{result.executionTimeMs} ms</span>
                 </div>
 
-                <Button variant="outline" size="sm" onClick={copyJson} className="mt-4">
+                <div className="grid grid-cols-2 gap-2 text-sm">
+                  <div>
+                    <span className="text-slate-500">Profile</span>
+                    <div className="font-medium">{result.profile.name}</div>
+                  </div>
+                  <div>
+                    <span className="text-slate-500">Validation Type</span>
+                    <div className="font-medium capitalize">{result.validationType}</div>
+                  </div>
+                </div>
+
+                {/* FAILED */}
+                {failed.length > 0 && (
+                  <div className="space-y-2">
+                    <h3 className="text-sm font-semibold text-red-600">
+                      Failed Guardrails ({failed.length})
+                    </h3>
+
+                    {failed.map((r, i) => (
+                      <div key={i} className="rounded-md border border-red-200 bg-red-50 p-3">
+                        <div className="flex items-center justify-between">
+                          <span className="font-mono text-sm font-medium">{r.guardrailName}</span>
+                          {r.severity && (
+                            <Badge variant="destructive" className="text-xs">
+                              {r.severity}
+                            </Badge>
+                          )}
+                        </div>
+
+                        {r.message && <p className="mt-1 text-sm text-slate-700">{r.message}</p>}
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                {/* PASSED */}
+                {passed.length > 0 && (
+                  <div className="space-y-2">
+                    <h3 className="text-sm font-semibold text-slate-600">
+                      Passed Guardrails ({passed.length})
+                    </h3>
+
+                    {passed.map((r, i) => (
+                      <div
+                        key={i}
+                        className="flex items-center justify-between rounded-md border p-2 text-sm"
+                      >
+                        <span className="font-mono">{r.guardrailName}</span>
+                        <Badge variant="outline" className="text-xs">
+                          Passed
+                        </Badge>
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                {/* RAW JSON */}
+                <details className="pt-2">
+                  <summary className="cursor-pointer text-sm text-slate-600">View raw JSON</summary>
+                  <pre className="mt-2 max-h-64 overflow-auto rounded-md bg-slate-900 p-3 text-xs text-slate-100">
+                    {JSON.stringify(result, null, 2)}
+                  </pre>
+                </details>
+
+                <Button variant="outline" size="sm" onClick={copyJson}>
                   {copied ? (
                     <Check className="mr-2 h-4 w-4" />
                   ) : (
