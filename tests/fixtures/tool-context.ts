@@ -7,6 +7,7 @@ import {
   type CapabilityToken,
   type AgentIdentity,
 } from '@/modules/guardrails/guards/tool/tool-access.guardrail';
+import type { BaseToolContext, IAMToolAccessContext } from '@/modules/guardrails/engine/context';
 
 export function createAgentIdentity(overrides: Partial<AgentIdentity> = {}): AgentIdentity {
   return {
@@ -34,7 +35,7 @@ export function createCapabilityToken(overrides: Partial<CapabilityToken> = {}):
   };
 }
 
-export function createToolAccessContext(overrides: Partial<any> = {}) {
+export function createToolAccessContext(overrides: Partial<unknown> = {}) {
   return {
     toolName: 'db.write',
     toolArgs: { table: 'users' },
@@ -49,4 +50,19 @@ export function createToolAccessContext(overrides: Partial<any> = {}) {
     },
     ...overrides,
   };
+}
+
+export interface ToolTestContext {
+  toolAccess?: {
+    toolName?: string;
+    toolArgs?: Record<string, unknown>;
+  };
+}
+
+export function createToolContext(tool: BaseToolContext) {
+  return { tool };
+}
+
+export function createIAMToolContext(tool: IAMToolAccessContext) {
+  return { toolAccess: tool };
 }

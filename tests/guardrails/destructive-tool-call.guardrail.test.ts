@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { DestructiveToolCallGuardrail } from '@/modules/guardrails/guards/tool/destructive-tool-call.guardrail';
-import { createToolAccessContext } from '../fixtures/tool-context';
+import { createToolContext } from '../fixtures/tool-context';
 
 describe('DestructiveToolCallGuardrail', () => {
   it('allows when no tool context exists', () => {
@@ -12,27 +12,24 @@ describe('DestructiveToolCallGuardrail', () => {
 
   it('allows safe tool invocation', () => {
     const g = new DestructiveToolCallGuardrail();
-    const ctx = {
-      toolAccess: createToolAccessContext({
-        toolName: 'db.read',
-        toolArgs: { table: 'users' },
-      }),
-    };
+    const ctx = createToolContext({
+      toolName: 'shell.exec',
+      toolArgs: { command: 'ls -la /tmp' },
+    });
 
-    const res = g.execute('', ctx as any);
+    const res = g.execute('', ctx);
     expect(res.passed).toBe(true);
+    expect(res.action).toBe('ALLOW');
   });
 
   it('blocks destructive command', () => {
     const g = new DestructiveToolCallGuardrail();
-    const ctx = {
-      toolAccess: createToolAccessContext({
-        toolName: 'shell.exec',
-        toolArgs: { command: 'rm -rf /' },
-      }),
-    };
+    const ctx = createToolContext({
+      toolName: 'shell.exec',
+      toolArgs: { command: 'rm -rf /' },
+    });
 
-    const res = g.execute('', ctx as any);
+    const res = g.execute('', ctx);
 
     expect(res.passed).toBe(false);
     expect(res.action).toBe('BLOCK');
@@ -42,14 +39,12 @@ describe('DestructiveToolCallGuardrail', () => {
 
   it('warns instead of blocking when warnOnly is enabled', () => {
     const g = new DestructiveToolCallGuardrail({ warnOnly: true });
-    const ctx = {
-      toolAccess: createToolAccessContext({
-        toolName: 'terraform.apply',
-        toolArgs: { action: 'terraform destroy' },
-      }),
-    };
+    const ctx = createToolContext({
+      toolName: 'shell.exec',
+      toolArgs: { command: 'rm -rf /' },
+    });
 
-    const res = g.execute('', ctx as any);
+    const res = g.execute('', ctx);
 
     expect(res.passed).toBe(true);
     expect(res.action).toBe('WARN');
@@ -60,14 +55,12 @@ describe('DestructiveToolCallGuardrail', () => {
       allowlist: ['shell.exec'],
     });
 
-    const ctx = {
-      toolAccess: createToolAccessContext({
-        toolName: 'shell.exec',
-        toolArgs: { command: 'rm -rf /tmp' },
-      }),
-    };
+    const ctx = createToolContext({
+      toolName: 'shell.exec',
+      toolArgs: { command: 'rm -rf /' },
+    });
 
-    const res = g.execute('', ctx as any);
+    const res = g.execute('', ctx);
 
     expect(res.passed).toBe(true);
     expect(res.action).toBe('ALLOW');

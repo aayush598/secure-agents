@@ -1,5 +1,9 @@
-export interface IAMToolAccessContext {
+export interface BaseToolContext {
   toolName: string;
+  toolArgs?: Record<string, unknown>;
+}
+
+export interface IAMToolAccessContext extends BaseToolContext {
   requiredPermissions: string[];
   grantedPermissions: string[];
 }
@@ -60,11 +64,10 @@ export interface GuardrailContext {
   ageVerified?: boolean;
   priorViolations?: number;
 
-  /* Tool execution */
-  toolName?: string;
-  toolArgs?: Record<string, unknown>;
+  /* Tool execution (normalized) */
+  tool?: BaseToolContext;
 
-  /* Tool execution (structured, optional) */
+  /* Tool execution (IAM / privileged) */
   toolAccess?: IAMToolAccessContext;
 
   /* Operational / policy context */

@@ -50,7 +50,9 @@ export class FileWriteRestrictionGuardrail extends BaseGuardrail<FileWriteRestri
   }
 
   execute(_: string, context: GuardrailContext): GuardrailResult {
-    const { toolName, toolArgs } = context;
+    const toolAccess = context.toolAccess;
+    const toolName = toolAccess?.toolName;
+    const toolArgs = toolAccess?.toolArgs;
 
     // Only enforce on file write–type tools
     if (!this.isFileWriteTool(toolName, toolArgs)) {
@@ -73,6 +75,9 @@ export class FileWriteRestrictionGuardrail extends BaseGuardrail<FileWriteRestri
     }
 
     const resolvedPath = this.resolvePath(filePath);
+    if (resolvedPath === '__BLOCK_RELATIVE__') {
+      return this.block('Relative file paths are not allowed');
+    }
 
     // Hidden files
     if (this.config.blockHiddenFiles && this.isHiddenFile(resolvedPath)) {
@@ -129,7 +134,7 @@ export class FileWriteRestrictionGuardrail extends BaseGuardrail<FileWriteRestri
     if (path.isAbsolute(p)) return path.normalize(p);
 
     if (!this.config.allowRelativePaths) {
-      throw new Error('Relative file paths are not allowed');
+      return '__BLOCK_RELATIVE__';
     }
 
     return path.resolve(process.cwd(), p);

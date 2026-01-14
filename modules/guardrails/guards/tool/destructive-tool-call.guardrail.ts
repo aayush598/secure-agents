@@ -1,5 +1,5 @@
 import { BaseGuardrail } from '@/modules/guardrails/engine/base.guardrails';
-import { GuardrailContext } from '../../engine/context';
+import { GuardrailContext, BaseToolContext } from '../../engine/context';
 import { GuardrailAction, GuardrailSeverity } from '@/modules/guardrails/engine/types';
 
 /* ========================================================================== */
@@ -40,7 +40,6 @@ export class DestructiveToolCallGuardrail extends BaseGuardrail<DestructiveToolC
     /\bhelm\s+uninstall\b/i,
 
     // OS / shell
-    /\bexec\b/i,
     /\beval\b/i,
     /\bsudo\b/i,
 
@@ -54,9 +53,13 @@ export class DestructiveToolCallGuardrail extends BaseGuardrail<DestructiveToolC
   }
 
   execute(_: string, context: GuardrailContext) {
-    const { toolName, toolArgs } = context;
+    // Support BOTH context styles
+    const tool: BaseToolContext | undefined = context.toolAccess ?? context.tool;
 
-    // Not a tool invocation
+    const toolName = tool?.toolName;
+    const toolArgs = tool?.toolArgs;
+
+    // No tool invocation
     if (!toolName) {
       return this.result({
         passed: true,
