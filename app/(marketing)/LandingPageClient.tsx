@@ -599,9 +599,8 @@ export default function LandingPageClient() {
               </Button>
               <Button
                 size="lg"
-                variant="outline"
                 onClick={() => scrollToSection('#pricing')}
-                className="border-2 border-white px-12 py-6 text-lg font-bold text-gray-600 transition-all duration-300 hover:bg-white hover:text-gray-900"
+                className="bg-white px-12 py-6 text-lg font-bold text-gray-600 transition-all duration-300 hover:bg-gray-100 hover:text-gray-900"
               >
                 View Pricing
               </Button>
