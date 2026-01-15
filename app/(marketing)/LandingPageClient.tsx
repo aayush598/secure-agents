@@ -91,7 +91,7 @@ export default function LandingPageClient() {
                 <div className="flex flex-col gap-4 pt-6 sm:flex-row">
                   <Button
                     size="lg"
-                    onClick={() => router.push('/sign-up')}
+                    onClick={() => router.push('/dashboard')}
                     className="group bg-gradient-to-r from-gray-600 to-gray-600 px-8 py-6 text-lg text-white shadow-xl shadow-gray-500/30 transition-all duration-300 hover:from-gray-700 hover:to-gray-700 hover:shadow-2xl hover:shadow-gray-500/40"
                   >
                     Start Free Trial
@@ -100,7 +100,7 @@ export default function LandingPageClient() {
                   <Button
                     size="lg"
                     variant="outline"
-                    onClick={() => scrollToSection('#how-it-works')}
+                    onClick={() => scrollToSection('/docs')}
                     className="border-2 border-gray-300 px-8 py-6 text-lg text-gray-700 transition-all duration-300 hover:border-gray-600 hover:bg-gray-50 hover:text-gray-600"
                   >
                     View Documentation
@@ -362,7 +362,7 @@ export default function LandingPageClient() {
 
           <div className="mt-12 text-center">
             <Button
-              onClick={() => router.push('/sign-up')}
+              onClick={() => router.push('/dashboard/profiles')}
               variant="outline"
               className="border-2 border-gray-600 px-8 py-3 font-semibold text-gray-600 transition-all duration-300 hover:bg-gray-600 hover:text-white"
             >
@@ -487,7 +487,7 @@ export default function LandingPageClient() {
                 </ul>
                 <Button
                   className="w-full bg-gray-900 text-white hover:bg-gray-800"
-                  onClick={() => router.push('/sign-up')}
+                  onClick={() => router.push('/dashboard')}
                 >
                   Get Started
                 </Button>
@@ -591,7 +591,7 @@ export default function LandingPageClient() {
             <div className="flex flex-col justify-center gap-4 sm:flex-row">
               <Button
                 size="lg"
-                onClick={() => router.push('/sign-up')}
+                onClick={() => router.push('/dashboard')}
                 className="hover:shadow-3xl group bg-white px-12 py-6 text-lg font-bold text-gray-600 shadow-2xl transition-all duration-300 hover:bg-gray-100 hover:text-gray-900"
               >
                 Start Building Now
