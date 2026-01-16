@@ -195,7 +195,7 @@ export default function LandingPageClient() {
                         <span className="text-yellow-400">GuardrailsClient</span>({'{'}
                         <br />
                         &nbsp;&nbsp;apiKey:{' '}
-                        <span className="text-green-400">`&apos;`grd_live_...`&apos;`</span>
+                        <span className="text-green-400">&apos;grd_live_...&apos;</span>
                         <br />
                         {'}'});
                         <br />
@@ -205,13 +205,13 @@ export default function LandingPageClient() {
                         <span className="text-blue-400">validate</span>({'{'}
                         <br />
                         &nbsp;&nbsp;text:{' '}
-                        <span className="text-green-400">`&apos;`Hello SDK test`&apos;`</span>,
+                        <span className="text-green-400">&apos;Hello SDK test&apos;</span>,
                         <br />
                         &nbsp;&nbsp;profileName:{' '}
-                        <span className="text-green-400">`&apos;`default`&apos;`</span>
+                        <span className="text-green-400">&apos;default&apos;</span>
                         <br />
                         &nbsp;&nbsp;validationType:{' '}
-                        <span className="text-green-400">`&apos;`input`&apos;`</span>
+                        <span className="text-green-400">&apos;input&apos;</span>
                         <br />
                         {'}'});
                       </code>
